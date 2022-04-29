@@ -27,7 +27,7 @@
               <a class="nav-link" href="gallery.php">Raporty</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.php">About/Dokumentacja</a>
+              <a class="nav-link" href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing">Dokumentacja</a>
             </li> 
             <li class="nav-item"> 
               <!-- <a class="nav-link" href="about.php" class="btn btn-outline-warning mb-3">Zaloguj</a> -->
