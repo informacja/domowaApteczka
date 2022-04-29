@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 ////////////////////
 $hostname = "mysql.agh.edu.pl";
 $username = "piotr";
-$password = "SRmSLTmUcujzV2o4";
+$password = "twojeHasło";
 $database = "piotr";
 
 $conn =  mysqli_connect(
@@ -63,9 +63,10 @@ $res = mysqli_query($conn, $sql);
 
 if ($res )
  echo "Rejestracja przebiegła pomyślnie<br>";
- else
- echo "Błąd rejestracji<br>";
-
+ else {
+ die("Błąd rejestracji" . mysqli_error($conn));
+ 
+}
  var_dump($_POST)
 // $sql = "SELECT `AVG`,`DEV`,`AVG+DEV` FROM `EDT`";
 
