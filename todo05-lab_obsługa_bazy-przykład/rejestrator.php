@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 ////////////////////
 $hostname = "mysql.agh.edu.pl";
 $username = "piotr";
-$password = "twojeHasło";
+$password = "SRmSLTmUcujzV2o4";
 $database = "piotr";
 
 $conn =  mysqli_connect(
