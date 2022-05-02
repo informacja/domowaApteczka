@@ -17,7 +17,7 @@
 
                         <div class="form-outline">
                             <input type="email" id="validationEmail" class="form-control form-control-lg"
-                                placeholder="Wprowadź poprawny adres email" required />
+                                placeholder="Wprowadź poprawny adres email" required name="email"/>
                             <label for="validationEmail" class="form-label">Adres email</label>
                             <div class="invalid-feedback">Proszę podać poprawny adres email.</div>
                         </div>
@@ -27,7 +27,7 @@
                     <div class="form-outline mb-3">
                         <div class="form-outline">
                             <input type="password" id="validationPassword" class="form-control form-control-lg"
-                                placeholder="Wprowadź hasło" required />
+                                placeholder="Wprowadź hasło" required name="haslo" />
                             <label class="form-label" for="validationPassword">Hasło</label>
                             <div class="valid-feedback">Nieźle!</div>
                         </div>
@@ -61,8 +61,8 @@
 session_start();
 if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
 session_regenerate_id();
-$_SESSION["startLogin"] = 1;
-$_SESSION["komunikat"] = "U mnie działa";
+// $_SESSION["startLogin"] = 1;
+// $_SESSION["komunikat"] = "U mnie działa";
 
 ?>
 
@@ -89,8 +89,8 @@ $_SESSION["komunikat"] = "U mnie działa";
     <pre>SESSION 
     <br> <a href="/~piotr/SIwM/Lab1.pdf">Lab 0</a> <br>
     <?PHP
-    $_SESSION["favcolor"] = "green";
-    $_SESSION["favanimal"] = "cat";
+    // $_SESSION["favcolor"] = "green";
+    // $_SESSION["favanimal"] = "cat";
     echo "sesion variable are set";
     var_dump($_SESSION);
     ?></pre>

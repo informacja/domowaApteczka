@@ -7,10 +7,9 @@ function redirect($url) {
 }
 
 session_start();
-echo '<meta charset="UTF-8">';
 session_regenerate_id();
 $_SESSION = array();
-$_SESSION["sessionLogin"]=1; 
+// $_SESSION["sessionLogin"]=1; 
 redirect("/");
 ?>
 <h1>P4.php</h1>
