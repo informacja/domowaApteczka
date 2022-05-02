@@ -12,10 +12,10 @@
                <ul class="navbar-nav">
                    <?php session_start();
               if($_SESSION["zalogowany"] != 1) {
-                            echo '<a href="register.php"><button  type="button" class="btn btn-outline-danger m-3 mb-0 mt-0">
+                            echo '<a href="register.php"><button  type="button" class="btn btn-outline-danger m-3 mb-0 mt-1">
                             Rejestracja
                           </button> </a>
-                          <a href="login.php"><button  type="button" class="btn btn-outline-success ">
+                          <a href="login.php"><button  type="button" class="btn btn-outline-success m-3 mb-0 mt-1">
                             Logowanie
                           </button> </a>';
                         } else{ ?>
