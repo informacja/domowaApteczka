@@ -5,7 +5,7 @@
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                <img src="img/draw2.webp"
                     class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -19,7 +19,7 @@
 
                         <div class="form-outline">
                             <input type="text" id="validationN" class="form-control form-control-lg"
-                                placeholder="Podaj Imie i Nazwisko" required />
+                                placeholder="Podaj Imie i Nazwisko" required name="name" />
                             <label for="validationN" class="form-label">Imie i Nazwisko</label>
                             <div class="invalid-feedback">Proszę podać Imię i Nazwisko</div>
                         </div>
@@ -29,7 +29,7 @@
 
                         <div class="form-outline">
                             <input type="email" id="validationEmail" class="form-control form-control-lg"
-                                placeholder="Podaj poprawny adres email" required />
+                                placeholder="Podaj poprawny adres email" required name="email" />
                             <label for="validationEmail" class="form-label">Adres email</label>
                             <div class="invalid-feedback">Proszę podać poprawny adres email.</div>
                         </div>
@@ -39,19 +39,19 @@
                     <div class="form-outline mb-3">
                         <div class="form-outline">
                             <input type="password" id="validationPassword" class="form-control form-control-lg"
-                                placeholder="Podaj hasło" required />
+                                placeholder="Podaj hasło" required name="pass"/>
                             <label class="form-label" for="validationPassword">Hasło</label>
                             <div class="valid-feedback">Już lepiej!</div>
                             <div class="invalid-feedback">Pole nie może być puste</div>
                         </div>
                     </div>
 
-                    <!-- First and LastName -->
+                    <!-- aidname -->
                     <div class="form-outline mb-3">
 
                         <div class="form-outline">
                             <input type="text" id="validationN" class="form-control form-control-lg"
-                                placeholder="Wybierz swoją apteczkę" required />
+                                placeholder="Wybierz swoją apteczkę" required name="aidkit"/>
                             <label for="validationN" class="form-label">Nazwa apteczki</label>
                             <div class="invalid-feedback">Pole nie może być puste</div>
                         </div>
@@ -79,6 +79,21 @@
 </section>
 
 <?php
+
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $name = chgw($_POST["name"]);
+    $email = chgw($_POST["email"]);
+    $haslo = chgw($_POST["pass"]);
+    $apteczka = chgw($_POST["aidkit"]);
+
+    // if(empty($_POST["imie"]))
+    // {
+    //     echo "Podaj imie".$_POST["name"];
+    // }
+    // else echo $imie."<br> Wybrałeś rodzinę systemów $comp";
+}
+
 session_start();
 if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
 session_regenerate_id();
@@ -87,37 +102,6 @@ $_SESSION["komunikat"] = "U mnie działa";
 
 ?>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Tytuł strony</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <h1>P1.php</h1>
-    <p>
-    <form action="charon.php" method="POST">
-        Hasło<input required type="password" name="haslo"> <br>
-        <input type="submit" value="!GET">
-        <input type="reset" value="!DROP">
-    </form>
-    </p>
-
-    <pre>SESSION 
-    <br> <a href="/~piotr/SIwM/Lab1.pdf">Lab 0</a> <br>
-    <?PHP
-    $_SESSION["favcolor"] = "green";
-    $_SESSION["favanimal"] = "cat";
-    echo "sesion variable are set";
-    var_dump($_SESSION);
-    ?></pre>
-</body>
-
-</html>
 
 <?php require('components/footer.inc.php'); ?>
 <style>
