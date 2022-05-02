@@ -51,7 +51,6 @@ else
 die("Błąd rejestracji apteczki<br>" . mysqli_error($conn));
  
 
-
 $sql = "INSERT INTO users (user_name, user_email, user_status, user_rights, apteczki_idapteczki)
      VALUES ('".$name."', '".$email."', '-1', '-1', '1')";
 
