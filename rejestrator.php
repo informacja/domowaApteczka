@@ -32,20 +32,25 @@ $conn =  mysqli_connect(
   $password,
   $database
 );
- echo "works";
 if (!$conn) {
  die("Connection failed:".mysqli_connect_error());
 }
 
-$sql = "INSERT INTO apteczki (apteczki_name)
-     VALUES ('".$apteczka."')";
+// select count > 1 
 
+// $sql = "INSERT INTO apteczki (apteczki_id, apteczki_name) VALUES ('1','".$apteczka."')";
+$sql = "INSERT INTO apteczki ( apteczki_name) VALUES ('".$apteczka."')";
+// $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
+// INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
 $res = mysqli_query($conn, $sql);
 
+echo "<h1>Uwaga</h1>";
 if ($res )
-echo "dopisano apteczke";
+echo "dopisano apteczke<br>";
 else
-echo "Błąd apteczki";
+die("Błąd rejestracji apteczki<br>" . mysqli_error($conn));
+ 
+
 
 $sql = "INSERT INTO users (user_name, user_email, user_status, user_rights, apteczki_idapteczki)
      VALUES ('".$name."', '".$email."', '-1', '-1', '1')";
@@ -53,10 +58,10 @@ $sql = "INSERT INTO users (user_name, user_email, user_status, user_rights, apte
 $res = mysqli_query($conn, $sql);
 
 if ($res )
-echo "dopisano usera";
+echo "dopisano usera<br>";
 else
-echo "Błąd";
-
+die("Błąd rejestracji<br>" . mysqli_error($conn));
+ 
 
 session_start();
 if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)

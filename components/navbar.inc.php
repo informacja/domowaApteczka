@@ -3,7 +3,11 @@
        <div class="container-fluid">
            <!-- Navbar brand -->
            <a class="navbar-brand" href="/"><img src="img/logo.png" alt="" /></a>
-
+           <i class="fa-solid fa-up-right-from-square"></i>
+                       <a class="nav-link" target="_blank"
+                           href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing">
+                           Dokumentacja</a>
+                  
            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
                <i class="fas fa-bars"></i>
@@ -29,11 +33,7 @@
                    <li class="nav-item">
                        <a class="nav-link" href="gallery.php">Raporty</a>
                    </li>
-                   <li class="nav-item">
-                       <a class="nav-link" target="_blank"
-                           href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing">
-                           <i class="fa-solid fa-up-right-from-square"></i>Dokumentacja</a>
-                   </li>
+                
                    <li class="nav-item">
                        <!-- <a class="nav-link" href="about.php" class="btn btn-outline-warning mb-3">Zaloguj</a> -->
                        <a href="logoff.php"><button type="button" class="btn btn-outline-warning mh-3">
