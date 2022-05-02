@@ -11,5 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
   </head>
   <body>
