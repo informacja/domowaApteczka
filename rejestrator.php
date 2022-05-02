@@ -1,5 +1,73 @@
 <?php require('components/head.inc.php'); ?>
+<?php require('components/functions.inc.php'); ?>
+
+<?php
+function chgw($dane){
+    $dane = trim($dane);
+    $dane = stripslashes($dane);
+    $dane = htmlspecialchars($dane);
+    return $dane;
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $name = chgw($_POST["name"]);
+    $email = chgw($_POST["email"]);
+    $haslo = chgw($_POST["pass"]);
+    $apteczka = chgw($_POST["aidkit"]);
+
+    // if(empty($_POST["imie"]))
+    // {
+    //     echo "Podaj imie".$_POST["name"];
+    // }
+    // else echo $imie."<br> Wybrałeś rodzinę systemów $comp";
+
+
+// if ! empyt/
+require('config.php');
+
+$conn =  mysqli_connect(
+  $hostname,
+  $username,
+  $password,
+  $database
+);
+ echo "works";
+if (!$conn) {
+ die("Connection failed:".mysqli_connect_error());
+}
+
+$sql = "INSERT INTO apteczki (apteczki_name)
+     VALUES ('".$apteczka."')";
+
+$res = mysqli_query($conn, $sql);
+
+if ($res )
+echo "dopisano apteczke";
+else
+echo "Błąd apteczki";
+
+$sql = "INSERT INTO users (user_name, user_email, user_status, user_rights, apteczki_idapteczki)
+     VALUES ('".$name."', '".$email."', '-1', '-1', '1')";
+
+$res = mysqli_query($conn, $sql);
+
+if ($res )
+echo "dopisano usera";
+else
+echo "Błąd";
+
+
+session_start();
+if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
+session_regenerate_id();
+$_SESSION["startLogin"] = 1;
+$_SESSION["komunikat"] = "U mnie działa";
+}
+?>
+
 <?php include('components/navbar.inc.php'); ?>
+
 
 <section class="vh-100">
     <div class="container-fluid h-custom">
@@ -78,64 +146,6 @@
     </div>
 </section>
 
-<?php
-
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    $name = chgw($_POST["name"]);
-    $email = chgw($_POST["email"]);
-    $haslo = chgw($_POST["pass"]);
-    $apteczka = chgw($_POST["aidkit"]);
-
-    // if(empty($_POST["imie"]))
-    // {
-    //     echo "Podaj imie".$_POST["name"];
-    // }
-    // else echo $imie."<br> Wybrałeś rodzinę systemów $comp";
-
-
-// if ! empyt/
-require('config.php');
-
-$conn =  mysqli_connect(
-  $hostname,
-  $username,
-  $password,
-  $database
-);
-
-if (!$conn) {
- die("Connection failed:".mysqli_connect_error());
-}
-
-$sql = "INSERT INTO apteczki (apteczki_name)
-     VALUES ('".$apteczka."')";
-
-$res = mysqli_query($conn, $sql);
-
-if ($res )
-echo "dopisano apteczke";
-else
-echo "Błąd apteczki";
-
-$sql = "INSERT INTO users (user_name, user_email, user_status, user_rights, apteczki_idapteczki)
-     VALUES ('".$name."', '".$email."', '-1', '-1', '1')";
-
-$res = mysqli_query($conn, $sql);
-
-if ($res )
-echo "dopisano usera";
-else
-echo "Błąd";
-
-
-session_start();
-if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
-session_regenerate_id();
-$_SESSION["startLogin"] = 1;
-$_SESSION["komunikat"] = "U mnie działa";
-}
-?>
 
 
 <?php require('components/footer.inc.php'); ?>
