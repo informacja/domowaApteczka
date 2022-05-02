@@ -12,7 +12,7 @@
                 <?php if(isset($_GET["wrongPassOrEmail"]))
                     echo "zle haslo";
             ?>
-
+<h1>WItaj w systemie</h1>
                 <form class="row g-3 needs-validation" novalidate action="rejestrator.php" method="POST">
                     <!-- First and LastName -->
                     <div class="form-outline mb-3">
