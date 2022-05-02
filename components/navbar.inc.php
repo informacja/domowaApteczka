@@ -17,9 +17,7 @@
                    <?php session_start(); 
                    //
                 if( !isset($_SESSION["zalogowany"]) && $_SESSION["zalogowany"] != 1) 
-                {
-                    // if () 
-                
+                {                
                             echo '<a href="register.php"><button  type="button" class="btn btn-outline-danger m-3 mb-0 mt-1">
                             Rejestracja
                           </button> </a>
