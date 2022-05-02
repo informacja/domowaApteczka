@@ -57,7 +57,7 @@ $user_password = mysqli_real_escape_string($conn, $user_password);
 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO users (user_fullanme, user_email, user_passwordhash)
-        VALUES ('".$user_fullanme."', '".$user_email."', '".$user_password_hash."')";
+        VALUES ('".$user_fullname."', '".$user_email."', '".$user_password_hash."')";
 
 $res = mysqli_query($conn, $sql);
 

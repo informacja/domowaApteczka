@@ -47,7 +47,7 @@ fclose($plik);
 ////////////////////
 $hostname = "mysql.agh.edu.pl";
 $username = "piotr";
-$password = "twojeHasło";
+$password = "pass";
 $database = "piotr";
 
 $conn =  mysqli_connect(
