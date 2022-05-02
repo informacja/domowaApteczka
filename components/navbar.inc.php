@@ -10,7 +10,7 @@
            </button>
            <div class="collapse navbar-collapse justify-content-end" id="navbarExample01">
                <ul class="navbar-nav">
-                   <?php session_start();
+                   <?php //session_start();
               if(isset($_SESSION["zalogowany"]) && $_SESSION["zalogowany"] != 1) {
                             echo '<a href="register.php"><button  type="button" class="btn btn-outline-danger m-3 mb-0 mt-1">
                             Rejestracja
