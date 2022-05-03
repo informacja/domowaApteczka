@@ -1,7 +1,7 @@
 <?php
 session_start();
 echo '<meta charset="UTF-8">';
-echo '<h1>P2.php</h1>';
+echo '<h2>Zapewne nie znaleziono pliku <i>config.php</i>, możesz go utworzyć kopiując  <i>config.template.php  </i>i wprwadając poprawne dane.</h2>';
 
 function redirect($url) {
     ob_start();
@@ -18,8 +18,8 @@ function chgw($dane){
     $user_email = chgw($_POST["email"]);
     $user_password = chgw($_POST["haslo"]);
 
-    require('config.php');
-
+    include('config.php') or die("dodaj config.php");
+      
     $conn =  mysqli_connect(
       $hostname,
       $username,

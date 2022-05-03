@@ -19,7 +19,7 @@
             }
             $nazwaApteczki = $_SESSION["apteczka"];
             if (zalogowany())
-                echo "<a class='nav-link text-body' target='_blank'
+                echo "<a class='nav-link text-body' 
                 href='#'> $nazwaApteczki
                 </a>"; 
            ?>
