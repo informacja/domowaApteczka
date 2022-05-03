@@ -1,1 +1,0 @@
-<a href="rejestracja.php"> Re</a>
