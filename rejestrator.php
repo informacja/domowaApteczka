@@ -76,7 +76,6 @@ if($res)
  echo "ERROR<br>" . mysqli_error($conn);
 ///////////////////////////////////////////////
 
-// dp[osamoe a[teczlo dp urzytkownika  w bazies]]
 $idApteczki = 0;
 $sql = "SELECT apteczki_id FROM apteczki WHERE apteczki_name = '".$apteczka."'";
 $res = mysqli_query($conn, $sql);
@@ -88,7 +87,7 @@ if ($res ){
     }
 }
 else die("Błąd pobrania id apteczki <br>" . mysqli_error($conn));
-
+///////////////////
 $sql = "INSERT INTO users (user_id, user_name, user_email, user_status, user_rights, apteczki_idapteczki, user_password_hash)
      VALUES ('NULL', '".$name."', '".$user_email."', '-1', '-1', '$idApteczki','".$user_passwordhash."')";
 
@@ -152,9 +151,6 @@ $_SESSION["komunikat"] = "U mnie działa";
     }
 }
 </style>
-
-
-
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
