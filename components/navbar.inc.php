@@ -59,7 +59,7 @@
 
                    <li class="nav-item">
                        <!-- <a class="nav-link" href="about.php" class="btn btn-outline-warning mb-3">Zaloguj</a> -->
-                       <a href="logoff.php"><button type="button" class="btn btn-outline-warning mh-3">
+                       <a href="logoff.php"><button type="button" class="btn btn-outline-warning m-3 mb-0 mt-1">
                                Wyloguj
                            </button></a>
                    </li>
