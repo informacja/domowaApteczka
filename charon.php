@@ -20,7 +20,7 @@ function chgw($dane){
     $user_email = chgw($_POST["email"]);
     $user_password = chgw($_POST["haslo"]);
 
-    include('config.php') or die("dodaj config.php");
+    require('config.php');
       
     $conn =  mysqli_connect(
       $hostname,
