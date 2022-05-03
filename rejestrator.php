@@ -41,30 +41,56 @@ $user_password = mysqli_real_escape_string($conn, $haslo);
 $user_passwordhash = password_hash($user_password, PASSWORD_DEFAULT);
 // select count > 1 
 
-// $sql = "INSERT INTO apteczki (apteczki_id, apteczki_name) VALUES ('1','".$apteczka."')";
-$sql = "INSERT INTO apteczki ( apteczki_id, apteczki_name) VALUES ('2', '".$apteczka."')";
-// $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
-// INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
-$res = mysqli_query($conn, $sql);
 
 echo "<h1>Uwaga</h1>";
-if ($res )
-echo "dopisano apteczke<br>";
-else
-die("Błąd rejestracji apteczki<br>" . mysqli_error($conn));
- 
+$sql = "SELECT COUNT(apteczki_name) FROM apteczki WHERE apteczki_name = '".$apteczka."'";
+$res = mysqli_query($conn, $sql);
+
+if($res)
+{
+    if( mysqli_num_rows($res) > 0 )
+    {
+        $record = mysqli_fetch_assoc($res); 
+        // echo "works $record";    
+        // var_dump($record);
+        $count = $record["COUNT(apteczki_name)"];
+        // echo "Liczba apteczek  = $count o nazwie $apteczka";
+        
+        if($count == 0)
+        {
+                // $sql = "INSERT INTO apteczki (apteczki_id, apteczki_name) VALUES ('1','".$apteczka."')";
+            $sql = "INSERT INTO apteczki ( apteczki_id, apteczki_name) VALUES ('0', '".$apteczka."')";
+            // $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
+            // INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
+            $res = mysqli_query($conn, $sql);
+
+            if ($res ){
+                echo "Dopisano apteczke<br>";
+                $_SESSION["apteczka"] = $apteczka;
+            }
+            else
+            { die("Błąd rejestracji apteczki<br>" . mysqli_error($conn)); }
+        }
+            
+    } 
+} 
+ else
+ echo "ERROR<br>" . mysqli_error($conn);
+
 
 $sql = "INSERT INTO users (user_id,user_name, user_email, user_status, user_rights, apteczki_idapteczki, user_password_hash)
-     VALUES ('0', '".$name."', '".$user_email."', '-1', '-1', '1','".$user_passwordhash."')";
+     VALUES ('NULL', '".$name."', '".$user_email."', '-1', '-1', '1','".$user_passwordhash."')";
 
 $res = mysqli_query($conn, $sql);
 
-if ($res )
-echo "dopisano usera<br>";
+if ($res ){
+
+    echo "<h5 class='m-5'>Dopisano poprawnie $name do bazy i apteczki: $apteczka<br>";
+}
 else
 die("Błąd rejestracji<br>" . mysqli_error($conn));
  
-
+// dp[osamoe a[teczlo dp urzytkownika  w bazies]]
 session_start();
 if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
 session_regenerate_id();
@@ -87,11 +113,13 @@ $_SESSION["komunikat"] = "U mnie działa";
                     echo "zle haslo";
             ?>
                 <h1>Witaj w systemie</h1>
+                <a href="login.php"><button  type="button" class="btn btn-outline-success m-3 mb-0 mt-1">
+                            Logowanie
+                          </button> </a>
             </div>
         </div>
     </div>
 </section>
-
 
 
 <?php require('components/footer.inc.php'); ?>
