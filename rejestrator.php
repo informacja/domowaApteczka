@@ -56,7 +56,7 @@ if($res)
         $count = $record["COUNT(apteczki_name)"];
         // echo "Liczba apteczek  = $count o nazwie $apteczka";
         
-        if($count == 0)
+        if($count == 0) // wtedy dopisz nową apteczkę
         {
                 // $sql = "INSERT INTO apteczki (apteczki_id, apteczki_name) VALUES ('1','".$apteczka."')";
             $sql = "INSERT INTO apteczki ( apteczki_id, apteczki_name) VALUES ('0', '".$apteczka."')";
@@ -70,16 +70,30 @@ if($res)
             }
             else
             { die("Błąd rejestracji apteczki<br>" . mysqli_error($conn)); }
-        }
-            
+        }            
     } 
-} 
+}
  else
  echo "ERROR<br>" . mysqli_error($conn);
+///////////////////////////////////////////////
+
+// dp[osamoe a[teczlo dp urzytkownika  w bazies]]
+$idApteczki = 0;
+$sql = "SELECT apteczki_id FROM apteczki WHERE apteczki_name = '".$apteczka."'";
+$res = mysqli_query($conn, $sql);
+
+if ($res ){ 
+    if( mysqli_num_rows($res) > 0 )    {
+        $record = mysqli_fetch_assoc($res);
+        $idApteczki = $record["apteczki_id"];
+    }
+}
+else die("Błąd pobrania id apteczki <br>" . mysqli_error($conn));
 
 
-$sql = "INSERT INTO users (user_id,user_name, user_email, user_status, user_rights, apteczki_idapteczki, user_password_hash)
-     VALUES ('NULL', '".$name."', '".$user_email."', '-1', '-1', '1','".$user_passwordhash."')";
+
+$sql = "INSERT INTO users (user_id, user_name, user_email, user_status, user_rights, apteczki_idapteczki, user_password_hash)
+     VALUES ('NULL', '".$name."', '".$user_email."', '-1', '-1', '$idApteczki','".$user_passwordhash."')";
 
 $res = mysqli_query($conn, $sql);
 
@@ -89,8 +103,8 @@ if ($res ){
 }
 else
 die("Błąd rejestracji<br>" . mysqli_error($conn));
- 
-// dp[osamoe a[teczlo dp urzytkownika  w bazies]]
+
+
 session_start();
 if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
 session_regenerate_id();
@@ -100,7 +114,6 @@ $_SESSION["komunikat"] = "U mnie działa";
 ?>
 
 <?php include('components/navbar.inc.php'); ?>
-
 
 <section class="vh-100">
     <div class="container-fluid h-custom">
