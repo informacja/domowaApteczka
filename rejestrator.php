@@ -41,7 +41,6 @@ $user_password = mysqli_real_escape_string($conn, $haslo);
 $user_passwordhash = password_hash($user_password, PASSWORD_DEFAULT);
 // select count > 1 
 
-
 echo "<h1>Uwaga</h1>";
 $sql = "SELECT COUNT(apteczki_name) FROM apteczki WHERE apteczki_name = '".$apteczka."'";
 $res = mysqli_query($conn, $sql);
@@ -90,8 +89,6 @@ if ($res ){
 }
 else die("Błąd pobrania id apteczki <br>" . mysqli_error($conn));
 
-
-
 $sql = "INSERT INTO users (user_id, user_name, user_email, user_status, user_rights, apteczki_idapteczki, user_password_hash)
      VALUES ('NULL', '".$name."', '".$user_email."', '-1', '-1', '$idApteczki','".$user_passwordhash."')";
 
@@ -126,9 +123,9 @@ $_SESSION["komunikat"] = "U mnie działa";
                     echo "zle haslo";
             ?>
                 <h1>Witaj w systemie</h1>
-                <a href="login.php"><button  type="button" class="btn btn-outline-success m-3 mb-0 mt-1">
-                            Logowanie
-                          </button> </a>
+                <a href="login.php"><button type="button" class="btn btn-outline-success m-3 mb-0 mt-1">
+                        Logowanie
+                    </button> </a>
             </div>
         </div>
     </div>

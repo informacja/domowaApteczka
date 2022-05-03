@@ -56,13 +56,15 @@ function chgw($dane){
 // ---------------------------------------------
 
     $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
- echo "$$user_password";
-    if(password_verify($correctPassHash, $user_password_hash))
+ echo "$user_password_hash<br> $correctPassHash<br>";
+ echo "$correctEmail <br>$user_email<br>";
+
+    if(password_verify($user_password, $correctPassHash))
     {
         $_SESSION["zalogowany"] = 1;
         echo "Logowanie udane";
         echo '<a href="protected.php"> protected </a>'; 
-        // redirect("/");
+        redirect("/");
     } else {
         $_SESSION["zalogowany"] = -1;
         echo "zle haslo";
