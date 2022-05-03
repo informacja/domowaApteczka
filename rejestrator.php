@@ -35,11 +35,14 @@ $conn =  mysqli_connect(
 if (!$conn) {
  die("Connection failed:".mysqli_connect_error());
 }
-
+$name = mysqli_real_escape_string($conn, $name);
+$user_email = mysqli_real_escape_string($conn, $email);
+$user_password = mysqli_real_escape_string($conn, $haslo);
+$user_passwordhash = password_hash($user_password, PASSWORD_DEFAULT);
 // select count > 1 
 
 // $sql = "INSERT INTO apteczki (apteczki_id, apteczki_name) VALUES ('1','".$apteczka."')";
-$sql = "INSERT INTO apteczki ( apteczki_name) VALUES ('".$apteczka."')";
+$sql = "INSERT INTO apteczki ( apteczki_id, apteczki_name) VALUES ('2', '".$apteczka."')";
 // $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
 // INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
 $res = mysqli_query($conn, $sql);
@@ -51,8 +54,8 @@ else
 die("Błąd rejestracji apteczki<br>" . mysqli_error($conn));
  
 
-$sql = "INSERT INTO users (user_name, user_email, user_status, user_rights, apteczki_idapteczki)
-     VALUES ('".$name."', '".$email."', '-1', '-1', '1')";
+$sql = "INSERT INTO users (user_id,user_name, user_email, user_status, user_rights, apteczki_idapteczki, user_password_hash)
+     VALUES ('0', '".$name."', '".$user_email."', '-1', '-1', '1','".$user_passwordhash."')";
 
 $res = mysqli_query($conn, $sql);
 
