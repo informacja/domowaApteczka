@@ -10,7 +10,7 @@ session_start();
 session_regenerate_id();
 $_SESSION = array();
 // $_SESSION["sessionLogin"]=1; 
-redirect("/");
+redirect("index.php");
 ?>
 <h1>P4.php</h1>
 <h2> Wylogowanie udane</h2> <br>
