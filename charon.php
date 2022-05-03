@@ -64,7 +64,7 @@ function chgw($dane){
         $_SESSION["zalogowany"] = 1;
         echo "Logowanie udane";
         echo '<a href="protected.php"> protected </a>'; 
-        redirect("/");
+        redirect("index.php");
     } else {
         $_SESSION["zalogowany"] = -1;
         echo "zle haslo";
