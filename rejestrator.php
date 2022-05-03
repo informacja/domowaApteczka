@@ -2,6 +2,9 @@
 <?php require('components/functions.inc.php'); ?>
 
 <?php
+echo '<meta charset="UTF-8">';
+echo '<h2>Zapewne nie znaleziono pliku <i>config.php</i>, możesz go utworzyć kopiując  <i>config.template.php  </i>i wprwadzając poprawne dane.</h2>';
+
 function chgw($dane){
     $dane = trim($dane);
     $dane = stripslashes($dane);
