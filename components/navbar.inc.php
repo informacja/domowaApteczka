@@ -3,10 +3,12 @@
        <div class="container-fluid">
            <!-- Navbar brand -->
            <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="" /></a>
-           <i class="fa-solid fa-up-right-from-square"></i>
-           <a class="nav-link" target="_blank"
-               href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing">
-               Dokumentacja</a>
+           <div>
+            <i class="fa-solid fa-up-right-from-square"></i>
+            <a class="nav-link" target="_blank"
+                href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing">
+                Dokumentacja</a>
+          </div>      
 
            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">

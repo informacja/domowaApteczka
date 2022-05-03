@@ -32,7 +32,7 @@ function chgw($dane){
     $user_email = mysqli_real_escape_string($conn, $user_email);
     $user_password = mysqli_real_escape_string($conn, $user_password);
     
-    $sql = "SELECT user_email, user_password_hash FROM `users` WHERE user_email='$user_email'";
+    $sql = "SELECT user_email, user_password_hash, apteczki_idapteczki FROM `users` WHERE user_email='$user_email'";
     // $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
     // INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
     $res = mysqli_query($conn, $sql);
@@ -46,12 +46,14 @@ function chgw($dane){
     $_SESSION["startLogin"] = -1;
     $correctEmail = "";
     $correctPassHash = "";
+    $idApteczki = "";
 
     if( mysqli_num_rows($res) > 0 )
     {
         $record = mysqli_fetch_assoc($res);
         $correctEmail = $record["user_email"];
         $correctPassHash = $record["user_password_hash"];
+        $idApteczki = $record["apteczki_idapteczki"];
     }
 // ---------------------------------------------
 
@@ -61,7 +63,21 @@ function chgw($dane){
 
     if(password_verify($user_password, $correctPassHash))
     {
+        $sql = "SELECT apteczki_name FROM `apteczki` WHERE apteczki_id='$idApteczki'";
+        $res = mysqli_query($conn, $sql);
+        
+        if ($res )
+            echo "odebrano z bazy<br>";
+        else die("Błąd1 <br>" . mysqli_error($conn));
+    
+        $nazwaApteczki = "";
+        if( mysqli_num_rows($res) > 0 )
+        {
+            $record = mysqli_fetch_assoc($res);
+            $nazwaApteczki = $record["apteczki_name"];
+        }
         $_SESSION["zalogowany"] = 1;
+        $_SESSION["apteczka"] = $nazwaApteczki;
         echo "Logowanie udane";
         echo '<a href="protected.php"> protected </a>'; 
         redirect("index.php");
