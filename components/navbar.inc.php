@@ -2,7 +2,7 @@
    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
        <div class="container-fluid">
            <!-- Navbar brand -->
-           <a class="navbar-brand" href="/"><img src="img/logo.png" alt="" /></a>
+           <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="" /></a>
            <i class="fa-solid fa-up-right-from-square"></i>
            <a class="nav-link" target="_blank"
                href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing">
