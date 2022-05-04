@@ -7,16 +7,16 @@
            <?php session_start();
             function zalogowany()
             {
-                if (!isset($_SESSION["zalogowany"])) {
-                    if (isset($_SESSION["zalogowany"])) {
-                        if ($_SESSION["zalogowany"] != 1) {
-                            return false;
-                        } else {
-                            return true;
-                        }
+              
+                if (isset($_SESSION["zalogowany"])) {
+                    if ($_SESSION["zalogowany"] != 1) {
+                        return false;
+                    } else {
+                        return true;
                     }
-                    return false;
-                }
+                } else return false;
+                // if (!isset($_SESSION["zalogowany"])) {
+                // return false;
             }
 
             if (zalogowany()) {

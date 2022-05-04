@@ -2,13 +2,29 @@
       <div class="container pt-3">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-5">
+            <?php 
+           
+            if (zalogowany())
+            {
+              $name = $_SESSION["name"];
+              $apteczkiName = $_SESSION["apteczka"];                
+
+                echo "
+              <h2>Witaj $name, Twoja apteczka to $apteczkiName</h2>
+  
+              <p>
+                Możesz dodać medykamenty, sprawdzić ich ceny i daty wżności. Wygeneruj raport, by sprawdzić integralność bazy i ruchy magazynowe.
+              </p>";
+            }
+            else echo "
             <h2>Witaj na stronie domowejApteczki</h2>
 
             <p>
               It's crafted with the latest trend of design & coded with all
               modern approaches. It's a robust & multi-dimensional usable
               template.
-            </p>
+            </p>";
+            ?>
 
             <button type="button" class="btn btn-outline-success btn-lg">
               Read more
