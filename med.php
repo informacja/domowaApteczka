@@ -4,7 +4,45 @@
 <?php include('components/companies.inc.php'); ?>
 dodaj
 utylizuj
-<table class="table">
+
+<?
+
+require('config.php');
+
+$conn =  mysqli_connect(
+    $hostname,
+    $username,
+    $password,
+    $database
+);
+if (!$conn) {
+    die("Connection failed:" . mysqli_connect_error());
+}
+$user_email = mysqli_real_escape_string($conn, $user_email);
+$user_password = mysqli_real_escape_string($conn, $user_password);
+
+$sql_leki = "SELECT leki_specyfikacja_idleki, ilosc_kupiona, ilosc_pozostala, leki_w_apteczce.status FROM `leki_w_apteczce`";
+
+$sql_apteczki = "SELECT apteczki_name FROM apteczki";
+
+$res = mysqli_query($conn, $sql_leki);
+if ($res)
+    echo "odebrano z bazy<br>";
+else
+    die("Błąd <br>" . mysqli_error($conn));
+
+if (mysqli_num_rows($res) > 0) {
+    while ($record = mysqli_fetch_assoc($res)) {
+        // var_dump($record);
+    }
+}
+
+?>
+
+
+<!-- INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('4', '1', '1', '7', '2', '2022-05-31', '1'); -->
+
+<!-- <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -32,7 +70,7 @@ utylizuj
             <td>@twitter</td>
         </tr>
     </tbody>
-</table>
+</table> -->
 
 <?php include('components/services.inc.php'); ?>
 <?php require('components/footer.inc.php'); ?>
