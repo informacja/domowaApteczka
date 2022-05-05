@@ -20,21 +20,12 @@ function chgw($dane){
     $user_email = chgw($_POST["email"]);
     $user_password = chgw($_POST["haslo"]);
 
-    require('config.php');
-      
-    $conn =  mysqli_connect(
-      $hostname,
-      $username,
-      $password,
-      $database
-    );
-    if (!$conn) {
-     die("Connection failed:".mysqli_connect_error());
-    }
+    require_once('config.php');
+    
     $user_email = mysqli_real_escape_string($conn, $user_email);
     $user_password = mysqli_real_escape_string($conn, $user_password);
     
-    $sql = "SELECT user_email, user_password_hash, apteczki_idapteczki, user_name FROM `users` WHERE user_email='$user_email'";
+    $sql = "SELECT user_email, user_password_hash, apteczki_idapteczki, user_name, user_id FROM `users` WHERE user_email='$user_email'";
     // $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
     // INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
     $res = mysqli_query($conn, $sql);
@@ -57,6 +48,7 @@ function chgw($dane){
         $correctPassHash = $record["user_password_hash"];
         $idApteczki = $record["apteczki_idapteczki"];
         $name = $record["user_name"];
+        $userId = $record["user_id"];
     }
 // ---------------------------------------------
 
@@ -81,7 +73,10 @@ function chgw($dane){
         }
         $_SESSION["zalogowany"] = 1;
         $_SESSION["apteczka"] = $nazwaApteczki;
+        $_SESSION["apteczkiId"] = $idApteczki;
         $_SESSION["name"] = $name; 
+        $_SESSION["userId"] = $userId;         
+
         echo "Logowanie udane";
         echo '<a href="protected.php"> protected </a>'; 
         redirect("index.php");

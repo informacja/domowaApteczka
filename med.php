@@ -1,22 +1,11 @@
 <?php require('components/head.inc.php'); ?>
 <?php include('components/navbar.inc.php'); ?>
 <?php include('components/companies.inc.php'); ?>
-
+add
 
 <?php
 
 require_once('config.php');  
-
- $conn =  mysqli_connect(
-    $hostname,
-    $username,
-    $password,
-    $database
- );
-if (!$conn) {
-    echo "<h1>Error</h1>";
-    die("Connection failed:" . mysqli_connect_error());
-}
 
 echo "dodaj
 utylizu";
