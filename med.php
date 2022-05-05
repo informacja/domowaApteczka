@@ -5,7 +5,18 @@ add
 
 <?php
 
-require_once('config.php');  
+require_once('config.php');
+
+$conn =  mysqli_connect(
+    $hostname,
+    $username,
+    $password,
+    $database
+);
+if (!$conn) {
+    echo "<h1>Error</h1>";
+    die("Connection failed:" . mysqli_connect_error());
+}
 
 echo "dodaj
 utylizu";
@@ -16,7 +27,7 @@ $sql_leki = "SELECT leki_specyfikacja_idleki, ilosc_kupiona, ilosc_pozostala, le
 
 $sql_apteczki = "SELECT apteczki_name FROM apteczki";
 // $sql = "SELECT apteczki_name FROM `apteczki` WHERE apteczki_id='1'";
-      
+
 $res = mysqli_query($conn, $sql_leki);
 // var_dump($conn);
 // mysqli_close($conn) ;
@@ -36,6 +47,12 @@ if (mysqli_num_rows($res) > 0) {
 
 
 <!-- INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('4', '1', '1', '7', '2', '2022-05-31', '1'); -->
+<!-- 
+INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('5', '1', '2', '2', '2', '2022-11-12', '0'); -->
+
+<!-- INSERT INTO `leki_specyfikacja` (`idleki`, `nazwa`, `subst_czynna`, `ean`, `op_zb`) VALUES ('1', 'Espumisan', 'simetikon', '5909990168712', 'przeciwko wzdęciom'); -->
+
+<!-- INSERT INTO `leki_wydane_wprowadzone` (`idleki_wydane`, `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ('25', '1', '2'); -->
 
 <!-- <table class="table">
     <thead>
