@@ -55,7 +55,7 @@
                            <a class="nav-link" href="med.php">Medykamenty</a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link" href="gallery.php">Raporty</a>
+                           <a class="nav-link" href="raport.php">Raporty</a>
                        </li>
 
                        <li class="nav-item">

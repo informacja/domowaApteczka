@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <?php if(isset($_GET["wrongPassOrEmail"]))
-                    echo "zle haslo";
+                    echo "<p>Złe hasło</p>";
             ?>
 
                 <form class="row g-3 needs-validation" novalidate action="rejestrator.php" method="POST">

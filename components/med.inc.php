@@ -8,10 +8,84 @@
       </svg>
       <div class="container">
         <div class="row align-items-center justify-content-center">
+          <?php 
+          
+            if(zalogowany())
+            {
+              if(isset($_GET["add"]))
+              { ?>
+               
+               <form class="row g-3 needs-validation" novalidate action="rejestrator.php" method="POST">
+                    <!-- First and LastName -->
+                    <div class="form-outline mb-3">
+
+                        <div class="form-outline">
+                            <input type="text" id="validationN" class="form-control form-control-lg"
+                                placeholder="Podaj Imie i Nazwisko" required name="name" />
+                            <label for="validationN" class="form-label">Imie i Nazwisko</label>
+                            <div class="invalid-feedback">Proszę podać Imię i Nazwisko</div>
+                        </div>
+
+                    </div><!-- Email input -->
+                    <div class="form-outline mb-3">
+
+                        <div class="form-outline">
+                            <input type="email" id="validationEmail" class="form-control form-control-lg"
+                                placeholder="Podaj poprawny adres email" required name="email" />
+                            <label for="validationEmail" class="form-label">Adres email</label>
+                            <div class="invalid-feedback">Proszę podać poprawny adres email.</div>
+                        </div>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <div class="form-outline">
+                            <input type="password" id="validationPassword" class="form-control form-control-lg"
+                                placeholder="Podaj hasło" required name="pass"/>
+                            <label class="form-label" for="validationPassword">Hasło</label>
+                            <div class="valid-feedback">Już lepiej!</div>
+                            <div class="invalid-feedback">Pole nie może być puste</div>
+                        </div>
+                    </div>
+
+                    <!-- aidname -->
+                    <div class="form-outline mb-3">
+
+                        <div class="form-outline">
+                            <input type="text" id="validationN" class="form-control form-control-lg"
+                                placeholder="Wybierz swoją apteczkę" required name="aidkit"/>
+                            <label for="validationN" class="form-label">Nazwa apteczki</label>
+                            <div class="invalid-feedback">Pole nie może być puste</div>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-1 pt-0">
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Zapoznaj się <a href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing"
+                                    class="link-info">Dokumentacja</a></p>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check mt-2 mb-3">
+                                <input class="form-check-input " type="checkbox" value="" id="invalidCheck" required />
+                                <label class="form-check-label" for="invalidCheck">Akceptuję postanowienia
+                                    dokumentacyjne</label>
+                                <div class="invalid-feedback">Musisz wyrazić zgodę.</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-lg" type="submit">Zarejestruj </button>
+                        </div>
+                </form>
+              <?php
+              }
+              else if(isset($_GET["utilization"]))
+              {
+                echo"sdfsf";
+              }else{      
+                    ?>
           <div class="col-md-5">
-            <button type="button" class="btn btn-outline-warning mb-3">
-              Coding
-            </button>
+            <a href="med.php?add"> <button type="button" class="btn btn-outline-warning mb-3">
+              Dodaj lek
+            </button></a>
 
             <h1>We code.</h1>
 
@@ -24,9 +98,9 @@
           <div class="col-md-5"><img src="img/coding_.svg" alt="" /></div>
           <div class="col-md-5"><img src="img/marketing.svg" alt="" /></div>
           <div class="col-md-5">
-            <button type="button " class="btn btn-outline-success mb-3">
-              Marketing
-            </button>
+          <a href="med.php?utilization"><button type="button " class="btn btn-outline-success mb-3" > 
+              Utylizuj
+            </button></a>
 
             <h1>We promote.</h1>
 
@@ -36,7 +110,7 @@
               sint cumque omnis iure nisi.
             </p>
           </div>
-          <div class="col-md-5">
+          <!-- <div class="col-md-5">
             <button type="button" class="btn btn-outline-light mb-3">
               Selling
             </button>
@@ -48,8 +122,9 @@
               Delectus, tempore placeat corrupti enim, cumque ex? Mollitia nihil
               sint cumque omnis iure nisi.
             </p>
-          </div>
-          <div class="col-md-5"><img src="img/revenue_.svg" alt="" /></div>
+          </div> -->
+          <!-- <div class="col-md-5"><img src="img/revenue_.svg" alt="" /></div> -->
+          <?php  } }?>
         </div>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 210">
