@@ -14,72 +14,147 @@
             {
               if(isset($_GET["add"]))
               { ?>
-               
-               <form class="row g-3 needs-validation" novalidate action="rejestrator.php" method="POST">
-                    <!-- First and LastName -->
-                    <div class="form-outline mb-3">
+               <div class="card-body p-5 text-white">
 
-                        <div class="form-outline">
-                            <input type="text" id="validationN" class="form-control form-control-lg"
-                                placeholder="Podaj Imie i Nazwisko" required name="name" />
-                            <label for="validationN" class="form-label">Imie i Nazwisko</label>
-                            <div class="invalid-feedback">Proszę podać Imię i Nazwisko</div>
-                        </div>
+<div class="my-md-5">
 
-                    </div><!-- Email input -->
-                    <div class="form-outline mb-3">
+  <div class="text-center pt-1">
+    <!-- <i class="fas fa-user-astronaut fa-3x"></i> -->
+    <h1 class="fw-bold my-5 text-uppercase">Dodaj lek</h1>
+  </div>
 
-                        <div class="form-outline">
-                            <input type="email" id="validationEmail" class="form-control form-control-lg"
-                                placeholder="Podaj poprawny adres email" required name="email" />
-                            <label for="validationEmail" class="form-label">Adres email</label>
-                            <div class="invalid-feedback">Proszę podać poprawny adres email.</div>
-                        </div>
-                    </div>
+  <div class="form-outline form-white mb-4">
+    <input type="text" id="typeEmail" class="form-control form-control-lg" />
+    <label class="form-label" for="typeEmail">Email</label>
+  </div>
 
-                    <!-- Password input -->
-                    <div class="form-outline mb-3">
-                        <div class="form-outline">
-                            <input type="password" id="validationPassword" class="form-control form-control-lg"
-                                placeholder="Podaj hasło" required name="pass"/>
-                            <label class="form-label" for="validationPassword">Hasło</label>
-                            <div class="valid-feedback">Już lepiej!</div>
-                            <div class="invalid-feedback">Pole nie może być puste</div>
-                        </div>
-                    </div>
+  <div class="form-outline form-white mb-4">
+    <input type="text" id="typePassword" class="form-control form-control-lg" />
+    <label class="form-label" for="typePassword">Password</label>
+  </div>
+<!-- 
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      value=""
+      id="flexCheckDefault"
+    />
+    <label class="form-check-label" for="flexCheckDefault">
+      Remember me
+    </label>
+  </div> -->
 
-                    <!-- aidname -->
-                    <div class="form-outline mb-3">
+  <div class="text-center py-5">
+    <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Login</button>
+  </div>
 
-                        <div class="form-outline">
-                            <input type="text" id="validationN" class="form-control form-control-lg"
-                                placeholder="Wybierz swoją apteczkę" required name="aidkit"/>
-                            <label for="validationN" class="form-label">Nazwa apteczki</label>
-                            <div class="invalid-feedback">Pole nie może być puste</div>
-                        </div>
+</div>
 
-                        <div class="text-center text-lg-start mt-1 pt-0">
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Zapoznaj się <a href="https://docs.google.com/document/d/1rAy8rusIkLc7iSBahAGxg7J_alW-ie1zLIlhgA1CuhE/edit?usp=sharing"
-                                    class="link-info">Dokumentacja</a></p>
-                        </div>
+<div class="text-center">
+  <p class="mb-0"><a href="#!" class="text-white fw-bold">Forgot password?</a></p>
+</div>
 
-                        <div class="col-12">
-                            <div class="form-check mt-2 mb-3">
-                                <input class="form-check-input " type="checkbox" value="" id="invalidCheck" required />
-                                <label class="form-check-label" for="invalidCheck">Akceptuję postanowienia
-                                    dokumentacyjne</label>
-                                <div class="invalid-feedback">Musisz wyrazić zgodę.</div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-primary btn-lg" type="submit">Zarejestruj </button>
-                        </div>
-                </form>
+</div>
               <?php
               }
               else if(isset($_GET["utilization"]))
-              {
-                echo"sdfsf";
+              { ?>
+                <section class="intro">
+  <div class="bg-image h-100" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/glassmorphism-article/img5.jpg');">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-7 col-xl-6">
+            <div class="card mask-custom">
+              <div class="card-body p-5 text-white">
+
+                <div class="my-4">
+
+                  <h2 class="text-center mb-5">Register Form</h2>
+
+                  <form>
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row">
+                      <div class="col-12 col-md-6 mb-4">
+                        <div class="form-outline form-white">
+                          <input type="text" id="form3Example1" class="form-control form-control-lg" />
+                          <label class="form-label" for="form3Example1">First name</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 mb-4">
+                        <div class="form-outline form-white">
+                          <input type="text" id="form3Example2" class="form-control form-control-lg" />
+                          <label class="form-label" for="form3Example2">Last name</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline form-white mb-4">
+                      <input type="email" id="form3Example3" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Example3">Email address</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline form-white mb-4">
+                      <input type="password" id="form3Example4" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Example4">Password</label>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-center mb-4">
+                      <input
+                        class="form-check-input me-2"
+                        type="checkbox"
+                        value=""
+                        id="form2Example3"
+                        checked
+                      />
+                      <label class="form-check-label" for="form2Example3">
+                        Subscribe to our newsletter
+                      </label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-light btn-block mb-4">Sign up</button>
+
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                      <p>or sign up with:</p>
+                      <button type="button" class="btn btn-light btn-floating mx-1">
+                        <i class="fab fa-facebook-f"></i>
+                      </button>
+
+                      <button type="button" class="btn btn-light btn-floating mx-1">
+                        <i class="fab fa-google"></i>
+                      </button>
+
+                      <button type="button" class="btn btn-light btn-floating mx-1">
+                        <i class="fab fa-twitter"></i>
+                      </button>
+
+                      <button type="button" class="btn btn-light btn-floating mx-1">
+                        <i class="fab fa-github"></i>
+                      </button>
+                    </div>
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<?php
+              }
+              else if(isset($_GET["wydaj"]))
+              { ?>
+<?php
               }else{      
                     ?>
           <div class="col-md-5">
@@ -110,10 +185,10 @@
               sint cumque omnis iure nisi.
             </p>
           </div>
-          <!-- <div class="col-md-5">
-            <button type="button" class="btn btn-outline-light mb-3">
-              Selling
-            </button>
+          <div class="col-md-5">
+          <a href="med.php?wydaj"><button type="button" class="btn btn-outline-light mb-3">
+              Wydaj
+            </button></a>
 
             <h1>We sell.</h1>
 
@@ -122,8 +197,8 @@
               Delectus, tempore placeat corrupti enim, cumque ex? Mollitia nihil
               sint cumque omnis iure nisi.
             </p>
-          </div> -->
-          <!-- <div class="col-md-5"><img src="img/revenue_.svg" alt="" /></div> -->
+          </div> 
+          <div class="col-md-5"><img src="img/revenue_.svg" alt="" /></div>
           <?php  } }?>
         </div>
       </div>
@@ -135,3 +210,4 @@
         ></path>
       </svg>
     </section>
+
