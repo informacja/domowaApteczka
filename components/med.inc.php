@@ -12,9 +12,22 @@
             if(isset($_POST)) // add lek
             {
               if(isset($_GET) && isset($_GET["addLek"])) // add lek
-              {
-                var_dump($_POST);
+              {                
+                $idLeku = $_POST["idLeku"];
+                $ilosc = $_POST["ilosc"];
+                $data = $_POST["data"];
+                $status = $_POST["status"];
+                $idApteczki = $_SESSION["idApteczki"];
 
+                $sql = "INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`)
+                VALUES (NULL, '$idApteczki', '$idLeku', '$ilosc', '$ilosc', '$data', '$status')";
+               
+                $res = mysqli_query($conn, $sql);
+
+                if ($res )
+                echo "<h2>Dopisano lek</h2>";
+                else
+                echo "Błąd dodawania leku";
               }
               if(isset($_GET) && isset($_GET["addSpecyfik"])) // add 
               {
@@ -94,12 +107,13 @@
                               $res = mysqli_query($conn, $sql);
                               
                               if ($res )  {                              
-                                  while( mysqli_num_rows($res) > 0 )  {
-                                      $record = mysqli_fetch_assoc($res);
+                                  if( mysqli_num_rows($res) > 0 )  {
+                                    while($record = mysqli_fetch_assoc($res)){
                                       $idLeku = $record["idleki"];
                                       $nazwaLeku = $record["nazwa"];
                                       echo "<option value='$idLeku'>$nazwaLeku</option>";
-                                  }
+                                    }
+                                  } else echo "Brak wierszy";
                               }
                               else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
 ?>         
@@ -273,9 +287,9 @@
                        </button></a>
 
                    <!-- _____________________________________  !!!!!!!!  -->
-                   <button type="button" value="Utylizuj" class="btn btn-light btn-floating mx-1">
+                   <!-- <button type="button" value="Utylizuj" class="btn btn-light btn-floating mx-1">
                        <i class="form-label"></i>
-                   </button>
+                   </button> -->
                    <!-- _____________________________________ !!!!!!!!!  -->
 
                    <h1>We promote.</h1>
