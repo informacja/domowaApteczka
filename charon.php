@@ -1,4 +1,4 @@
-<?php require('components/head.inc.php'); ?>
+<?php require('components/head.inc.php'); ?>witajwitaj
 
 <?php
 session_start();

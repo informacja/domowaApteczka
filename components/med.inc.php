@@ -274,9 +274,7 @@
                    <h1>We code.</h1>
 
                    <p>
-                       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                       Delectus, tempore placeat corrupti enim, cumque ex? Mollitia nihil
-                       sint cumque omnis iure nisi.
+                       Utrzymuj porządek w swoich domowych zbiorach leczniczych. Dodawaj swoje leki zaraz po ich zakupie.
                    </p>
                </div>
                <div class="col-md-5"><img src="img/coding_.svg" alt="" /></div>

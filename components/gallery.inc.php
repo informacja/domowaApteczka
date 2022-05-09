@@ -11,9 +11,7 @@
           <div class="col-md-10">
             <h1>Check our latest awesome creative work</h1>
             <p>
-              It's crafted with the latest trend of design & coded with all
-              modern approaches. It's a robust & multi-dimensional usable
-              template
+            Domowa Apteczka. System, który umożliwi Ci zarządzanie domowymi farmaceutykami szybko i skutecznie.
             </p>
           </div>
         </div>
