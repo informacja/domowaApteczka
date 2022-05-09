@@ -7,8 +7,73 @@
        <div class="container">
            <div class="row align-items-center justify-content-center">
 <?php
+ 
           if (zalogowany()) {
-            if (isset($_GET["add"])) { 
+            if(isset($_POST)) // add lek
+            {
+              if(isset($_GET) && isset($_GET["addLek"])) // add lek
+              {
+                var_dump($_POST);
+
+              }
+              if(isset($_GET) && isset($_GET["addSpecyfik"])) // add 
+              {
+                $nazwa = $_POST["nazwa"];
+                $substancjaCzynna = $_POST["substancjaCzynna"];
+                $ean = $_POST["ean"];
+                $opZb = $_POST["opZb"];
+
+                $sql = "INSERT INTO `leki_specyfikacja` (`idleki`, `nazwa`, `subst_czynna`, `ean`, `op_zb`)
+                 VALUES (NULL, '$nazwa', '$substancjaCzynna', '$ean', '$opZb')";
+
+                $res = mysqli_query($conn, $sql);
+
+                if ($res )
+                echo "<h2>Dopisano specyfik $nazwa</h2>";
+                else
+                echo "Błąd apteczki";
+              }
+            }
+
+            if (isset($_GET["addSpec"])) { ?>
+
+              <div class="card-body p-5 text-white">
+              <div class="my-md-5">
+                  <div class="text-center pt-1">
+                      <h1 class="fw-bold my-5 text-uppercase">Dodaj specyfik</h1>
+
+                  </div>                
+                  <form method="POST" action="med.php?addSpecyfik">
+                      <!-- <div class="form-outline form-white mb-4">
+                          <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
+                          <label class="form-label" for="typeName">Nazwa leku</label>
+                      </div> -->
+                      <div class="form-outline form-white mb-4">
+                          <input type="text" id="typeName" class="form-control form-control-lg" name="nazwa" required />
+                          <label class="form-label" for="typeName">Nazwa specyfiku</label>
+                      </div>
+                      <div class="form-outline form-white mb-4">
+                          <input type="text" id="typeName" class="form-control form-control-lg" name="substancjaCzynna" required />
+                          <label class="form-label" for="typeName">Substancja czynna</label>
+                      </div>
+
+                      <div class="form-outline form-white mb-4">
+                          <input type="text" id="typePassword" class="form-control form-control-lg" name="ean" required/>
+                          <label class="form-label" for="typePassword">EAN</label>
+                      </div>
+                      <div class="form-outline form-white mb-4">
+                          <input type="text" id="typePassword" class="form-control form-control-lg" name="opZb" required/>
+                          <label class="form-label" for="typePassword">Opakowanie zbiorcze</label>
+                      </div>
+                          <div class="text-center py-5">
+                              <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button>
+                          </div>
+                    </form>
+              </div>
+          </div>
+<?php
+            }
+            else if (isset($_GET["add"])) { 
 ?>
                <div class="card-body p-5 text-white">
                    <div class="my-md-5">
@@ -17,18 +82,21 @@
                            <h1 class="fw-bold my-5 text-uppercase">Dodaj lek</h1>
 
                        </div>
-                       <form method="POST" action="med.php">
+                       <div class="select-custom-content">
+                              <a href="med.php?addSpec"><button class="btn-save btn btn-primary btn-sm">Dodaj nowy specyfik</button></a>
+                            </div>
+                       <form method="POST" action="med.php?addLek">
                          <div style="display:inline-block;">
-                          <select class="select" name="nazwaLeku">
+                          <select class="select my-3 py-2" name="idLeku">
 <?php
                               // require_once("conifg.php");
-                              $sql = "SELECT idleki, nazwa FROM `leki_specyfikacja`";
+                              $sql = "SELECT * FROM `leki_specyfikacja`";
                               $res = mysqli_query($conn, $sql);
                               
                               if ($res )  {                              
-                                  if( mysqli_num_rows($res) > 0 )  {
+                                  while( mysqli_num_rows($res) > 0 )  {
                                       $record = mysqli_fetch_assoc($res);
-                                      $idLeki = $record["idleki"];
+                                      $idLeku = $record["idleki"];
                                       $nazwaLeku = $record["nazwa"];
                                       echo "<option value='$idLeku'>$nazwaLeku</option>";
                                   }
@@ -36,25 +104,22 @@
                               else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
 ?>         
                             </select>
-                            <div class="select-custom-content">
-                              <a href="med.php?addSpec"><button class="btn-save btn btn-primary btn-sm">Dodaj nowy specyfik</button></a>
-                            </div>
                         </div>
                            <!-- <div class="form-outline form-white mb-4">
                                <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
                                <label class="form-label" for="typeName">Nazwa leku</label>
                            </div> -->
                            <div class="form-outline form-white mb-4">
-                               <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
+                               <input type="number" id="typeName" class="form-control form-control-lg" name="ilosc" required />
                                <label class="form-label" for="typeName">Ilość kupiona</label>
                            </div>
                            <div class="form-outline form-white mb-4">
-                               <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
+                               <input type="date" id="typeName" class="form-control form-control-lg" name="data" required />
                                <label class="form-label" for="typeName">Data ważności</label>
                            </div>
 
                            <div class="form-outline form-white mb-4">
-                               <input type="text" id="typePassword" class="form-control form-control-lg" />
+                               <input type="number" id="typePassword" class="form-control form-control-lg" name="status" required/>
                                <label class="form-label" for="typePassword">Status</label>
                            </div>
                            <!-- 
@@ -73,7 +138,7 @@
                            <!-- _____________________________________  !!!!!!!!  -->
                            
                                <div class="text-center py-5">
-                                   <a href="med.php?addMed"><button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button></a>
+                                   <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button>
                                </div>
                            
                            <!-- _____________________________________ !!!!!!!!!  -->
