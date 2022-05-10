@@ -32,6 +32,9 @@ $sql_leki = "SELECT leki_specyfikacja_idleki, ilosc_kupiona, ilosc_pozostala, le
 
 $sql_apteczki = "SELECT apteczki_name FROM apteczki";
 
+$sql_leki_ceny = "SELECT * FROM `leki_specyfikacja` ORDER BY `price` ASC";
+
+$
 Przychodów i rozchodów
 
 - zakupionych
