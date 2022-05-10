@@ -6,12 +6,18 @@
        </svg>
        <div class="container">
            <div class="row align-items-center justify-content-center">
-<?php
+               <?php
  
           if (zalogowany()) {
             if(isset($_POST)) // add lek
             {
-              if(isset($_GET) && isset($_GET["addLek"])) // add lek
+                
+                if(isset($_GET) && isset($_GET["updatePozostalo"])) // add lek
+                {
+                    // update ilosc pozostala
+                    // <a href='=$d&idLeku=$idleki_w_apteczce'>
+                }
+              else if(isset($_GET) && isset($_GET["addLek"])) // add lek
               {                
                 $idLeku = $_POST["idLeku"];
                 $nazwaLeku = $_POST["nazwaLeku"];
@@ -57,41 +63,45 @@
 
             if (isset($_GET["addSpec"])) { ?>
 
-              <div class="card-body p-5 text-white">
-              <div class="my-md-5">
-                  <div class="text-center pt-1">
-                      <h1 class="fw-bold my-5 text-uppercase">Dodaj specyfik</h1>
+               <div class="card-body p-5 text-white">
+                   <div class="my-md-5">
+                       <div class="text-center pt-1">
+                           <h1 class="fw-bold my-5 text-uppercase">Dodaj specyfik</h1>
 
-                  </div>                
-                  <form method="POST" action="med.php?addSpecyfik">
-                      <!-- <div class="form-outline form-white mb-4">
+                       </div>
+                       <form method="POST" action="med.php?addSpecyfik">
+                           <!-- <div class="form-outline form-white mb-4">
                           <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
                           <label class="form-label" for="typeName">Nazwa leku</label>
                       </div> -->
-                      <div class="form-outline form-white mb-4">
-                          <input type="text" id="typeName" class="form-control form-control-lg" name="nazwa" required />
-                          <label class="form-label" for="typeName">Nazwa specyfiku</label>
-                      </div>
-                      <div class="form-outline form-white mb-4">
-                          <input type="text" id="typeName" class="form-control form-control-lg" name="substancjaCzynna" required />
-                          <label class="form-label" for="typeName">Substancja czynna</label>
-                      </div>
+                           <div class="form-outline form-white mb-4">
+                               <input type="text" id="typeName" class="form-control form-control-lg" name="nazwa"
+                                   required />
+                               <label class="form-label" for="typeName">Nazwa specyfiku</label>
+                           </div>
+                           <div class="form-outline form-white mb-4">
+                               <input type="text" id="typeName" class="form-control form-control-lg"
+                                   name="substancjaCzynna" required />
+                               <label class="form-label" for="typeName">Substancja czynna</label>
+                           </div>
 
-                      <div class="form-outline form-white mb-4">
-                          <input type="text" id="typePassword" class="form-control form-control-lg" name="ean" required/>
-                          <label class="form-label" for="typePassword">EAN</label>
-                      </div>
-                      <div class="form-outline form-white mb-4">
-                          <input type="text" id="typePassword" class="form-control form-control-lg" name="opZb" required/>
-                          <label class="form-label" for="typePassword">Opakowanie zbiorcze</label>
-                      </div>
-                          <div class="text-center py-5">
-                              <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button>
-                          </div>
-                    </form>
-              </div>
-          </div>
-<?php
+                           <div class="form-outline form-white mb-4">
+                               <input type="text" id="typePassword" class="form-control form-control-lg" name="ean"
+                                   required />
+                               <label class="form-label" for="typePassword">EAN</label>
+                           </div>
+                           <div class="form-outline form-white mb-4">
+                               <input type="text" id="typePassword" class="form-control form-control-lg" name="opZb"
+                                   required />
+                               <label class="form-label" for="typePassword">Opakowanie zbiorcze</label>
+                           </div>
+                           <div class="text-center py-5">
+                               <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+               <?php
             }
             else if (isset($_GET["add"])) { 
 ?>
@@ -103,12 +113,13 @@
 
                        </div>
                        <div class="select-custom-content">
-                              <a href="med.php?addSpec"><button class="btn-save btn btn-primary btn-sm">Dodaj nowy specyfik</button></a>
-                            </div>
+                           <a href="med.php?addSpec"><button class="btn-save btn btn-primary btn-sm">Dodaj nowy
+                                   specyfik</button></a>
+                       </div>
                        <form method="POST" action="med.php?addLek">
-                         <div style="display:inline-block;">
-                          <select class="select my-3 py-2" name="idLeku">
-<?php
+                           <div style="display:inline-block;">
+                               <select class="select my-3 py-2" name="idLeku">
+                                   <?php
                               // require_once("conifg.php");
                               $sql = "SELECT * FROM `leki_specyfikacja`";
                               $res = mysqli_query($conn, $sql);
@@ -123,33 +134,37 @@
                                   } else echo "Brak wierszy";
                               }
                               else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
-?>         
-                            </select>
-                            <div class="form-outline form-white mb-4">
-                               <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
-                               <label class="form-label" for="typeName">lub Nazwa leku</label>
+?>
+                               </select>
+                               <div class="form-outline form-white mb-4">
+                                   <input type="text" id="typeName" class="form-control form-control-lg"
+                                       name="nazwaLeku" />
+                                   <label class="form-label" for="typeName">lub Nazwa leku</label>
+                               </div>
                            </div>
-                        </div>
-                    
+
                            <div class="form-outline form-white mb-4">
-                               <input type="number" id="typeName" class="form-control form-control-lg" name="ilosc" required />
+                               <input type="number" id="typeName" class="form-control form-control-lg" name="ilosc"
+                                   required />
                                <label class="form-label" for="typeName">Ilość kupiona</label>
                            </div>
                            <div class="form-outline form-white mb-4">
-                               <input type="date" id="typeName" class="form-control form-control-lg" name="data" required />
+                               <input type="date" id="typeName" class="form-control form-control-lg" name="data"
+                                   required />
                                <label class="form-label" for="typeName">Data ważności</label>
                            </div>
 
                            <div class="form-outline form-white mb-4">
-                               <input type="number" id="typePassword" class="form-control form-control-lg" name="cena" required/>
+                               <input type="number" id="typePassword" class="form-control form-control-lg" name="cena"
+                                   required />
                                <label class="form-label" for="typePassword">Cena</label>
                            </div>
                            <!-- _____________________________________  !!!!!!!!  -->
-                           
-                               <div class="text-center py-5">
-                                   <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button>
-                               </div>
-                           
+
+                           <div class="text-center py-5">
+                               <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">Dodaj</button>
+                           </div>
+
                            <!-- _____________________________________ !!!!!!!!!  -->
 
                        </form>
@@ -160,16 +175,48 @@
                           $idApteczki = $_SESSION["apteczkiId"];
 
 ?>
-<table class="table table-hover"></table>
-<?php
-              $sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki && leki_w_apteczce.apteczki_idapteczki = $idApteczki";
+               <table class="table text-white ">
+                   <thead>
+                       <tr>
+                           <th scope="col">L.p.</th>
+                           <th scope="col">Nazwa leku</th>
+                           <th scope="col">Data ważności</th>
+                           <th scope="col">Pozostała ilość</th>
+                           <th scope="col">Ilość</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <?php
+              $sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE 
+              leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+              && leki_w_apteczce.apteczki_idapteczki = $idApteczki
+              && leki_w_apteczce.data_waznosci <= CURRENT_DATE
+              && leki_w_apteczce.status > 0";
 
               $res = mysqli_query($conn, $sql);
 
               if ($res )  {                              
                 if( mysqli_num_rows($res) > 0 )  {
+                    $counter= 0;
                   while($record = mysqli_fetch_assoc($res)){
                     var_dump($record);
+                    echo "<br>";
+                    $counter++;
+                    $idleki_w_apteczce = $record["idleki_w_apteczce"];
+                    $nazwa = $record["nazwa"];
+                    $data_waznosci = $record["data_waznosci"];
+                    $ilosc_pozostala = $record["ilosc_pozostala"];
+                    echo "<tr>
+                    <th scope='row'>$counter</th>
+                    <td>$nazwa</td>
+                    <td>$data_waznosci</td>
+                    <td>$ilosc_pozostala</td>
+                    <td> 
+
+                    <div class='text-center'>
+                    <a href='med.php?setZero=$idleki_w_apteczce'><button class='btn btn-light btn-lg btn-rounded ' type='submit'>Utylizuj</button></a>
+                </div></td>
+                  </tr>";
 
                     // array(12) { ["idleki_w_apteczce"]=> string(1) "2"
                     //    ["apteczki_idapteczki"]=> string(1) "2"
@@ -190,28 +237,64 @@
                 } else echo "Brak wierszy";
               }
               else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));?>
-              ?> 
+                   </tbody>
+               </table>
                <?php
-            } else if (isset($_GET["wydaj"])) { 
-              $idApteczki = $_SESSION["apteczkiId"];
+            } else if (isset($_GET["wydaj"])) { ?>
 
-              $sql = "SELECT * FROM `leki_w_apteczce` WHERE apteczki_idapteczki = $idApteczki";
+<table class="table text-white ">
+                   <thead>
+                       <tr>
+                           <th scope="col">L.p.</th>
+                           <th scope="col">Nazwa leku</th>
+                           <th scope="col">Data ważności</th>
+                           <th scope="col">Pozostała ilość</th>
+                           <th scope="col">Ilość</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <?php
+
+                  $idApteczki = $_SESSION["apteczkiId"];
+
+              $sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE 
+              leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+              && leki_w_apteczce.apteczki_idapteczki = $idApteczki
+              && leki_w_apteczce.data_waznosci > CURRENT_DATE
+              && leki_w_apteczce.status > 0";
 
               $res = mysqli_query($conn, $sql);
-              
+
               if ($res )  {                              
                 if( mysqli_num_rows($res) > 0 )  {
+                    $counter= 0;
                   while($record = mysqli_fetch_assoc($res)){
                     var_dump($record);
-                    // $idLeku = $record["idleki"];
-                    // $nazwaLeku = $record["nazwa"];
-                    // echo "<option value='$idLeku'>$nazwaLeku</option>";
+                    echo "<br>";
+                    $counter++;
+                    $idleki_w_apteczce = $record["idleki_w_apteczce"];
+                    $nazwa = $record["nazwa"];
+                    $data_waznosci = $record["data_waznosci"];
+                    $ilosc_pozostala = $record["ilosc_pozostala"];
+                    echo "<tr>
+                    <th scope='row'>$counter</th>
+                    <td>$nazwa</td>
+                    <td>$data_waznosci</td>
+                    <td>$ilosc_pozostala</td>
+                    <td><form method='post' action='med.php?med.php?updatePozostalo'><input min='1' max='$ilosc_pozostala' type='number' id='typeName' class='form-control form-control-sm' name='ilosc'
+                                   required />                               
+                                <div class='text-center'>
+                    <button class='btn btn-light btn-lg btn-rounded ' type='submit'>Użyj</button>
+                </div></form></td>
+                  </tr>";
+
                   }
                 } else echo "Brak wierszy";
-            }
-            else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));?>
-
-<!-- array(7) { ["idleki_w_apteczce"]=> string(1) "2" ["apteczki_idapteczki"]=> string(1) "2" [
+              }
+              else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));?>
+                   </tbody>
+               </table>
+               <!-- array(7) { ["idleki_w_apteczce"]=> string(1) "2" ["apteczki_idapteczki"]=> string(1) "2" [
   "leki_specyfikacja_idleki"]=> string(1) "1" ["ilosc_kupiona"]=> string(1) "1" ["ilosc_pozostala"]=> string(1) "1"
    ["data_waznosci"]=> string(10) "2022-05-03" ["status"]=> string(1) "0" } -->
 
@@ -227,7 +310,8 @@
                    <h1>Uzupełniaj</h1>
 
                    <p>
-                       Utrzymuj porządek w swoich domowych zbiorach leczniczych. Dodawaj swoje leki zaraz po ich zakupie.
+                       Utrzymuj porządek w swoich domowych zbiorach leczniczych. Dodawaj swoje leki zaraz po ich
+                       zakupie.
                    </p>
                </div>
                <div class="col-md-5"><img src="img/coding_.svg" alt="" /></div>

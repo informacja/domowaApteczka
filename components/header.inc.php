@@ -25,7 +25,7 @@
                           while($record = mysqli_fetch_assoc($res)){
                             $count = $record["count(*)"];
                             // $nazwaLeku = $record["nazwa"];
-                            echo "<h4>Są $count leki przeterminowane, przejdź do meykamentów.</h4>";
+                            echo "<h4>Liczba przeterminowanych leków to $count, przejdź do zarządzania meykamentów.</h4>";
                           }
                         } else echo "Brak przeterminowanych leków";
                     } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
