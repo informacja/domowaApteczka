@@ -1,13 +1,31 @@
 <?php require('components/head.inc.php'); ?>
 <?php include('components/navbar.inc.php'); ?>
-
+<?php include('components/companies.inc.php'); ?> 
 <?php
+
+require_once("config.php");
+            $sql = "SELECT * FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE";
+                    $res = mysqli_query($conn, $sql);
+                    
+                    if ($res )  {                              
+                        if( mysqli_num_rows($res) > 0 )  {
+                          while($record = mysqli_fetch_assoc($res)){
+                            $count = $record["count(*)"];
+                            // $nazwaLeku = $record["nazwa"];
+							var_dump($record);
+                            echo "<br>";//<h4>Są $count leki przeterminowane, przejdź do meykamentów.</h4>";
+                          }
+                        } else echo "Brak przeterminowanych leków";
+                    } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
+
+            
 echo  "view all the data
 *raport.php*
 Tabelki:
 - utylizacji
 - zakupionych
-- zużytych";
+- zużytych
+LOG";
 ?>
 
 $sql_leki = "SELECT leki_specyfikacja_idleki, ilosc_kupiona, ilosc_pozostala, leki_w_apteczce.status FROM `leki_w_apteczce`";
@@ -100,3 +118,6 @@ $sql_leki_niewazne = "SELECT leki_specyfikacja_idleki, ilosc_kupiona, ilosc_pozo
 			</tbody>
 		</table>
 	</div>
+<?php require('components/footer.inc.php'); ?>
+
+
