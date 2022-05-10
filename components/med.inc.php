@@ -9,7 +9,7 @@
                <?php
  
           if (zalogowany()) {
-            if(isset($_POST)) // add lek
+            if(isset($_POST)) 
             {                              
                 if(isset($_GET) && isset($_POST["iloscUsed"]))
                 {
@@ -43,19 +43,21 @@
                if(isset($_GET) && isset($_GET["addLek"])) // add lek
               {                
                 $idLeku = $_POST["idLeku"];
+
                 $nazwaLeku = $_POST["nazwaLeku"];
                 $ilosc = $_POST["ilosc"];
                 $data = $_POST["data"];
+
                 $cena = $_POST["cena"];
                 $idApteczki = $_SESSION["apteczkiId"];
-                if( isempty($nazwaLeku) )
-                {
+ 
+                // if( isempty($nazwaLeku) )
+                // {
 
-                }else {
-                    // select id specyfiku po nazwie
-                }
-
-                $sql = "INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `cena`, `status`)
+                // }else {
+                //     // select id specyfiku po nazwie
+                // }
+                $sql = "INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `price`, `status`)
                 VALUES (NULL, '$idApteczki', '$idLeku', '$ilosc', '$ilosc', '$data', '$cena', '1')";
                
                 $res = mysqli_query($conn, $sql);
