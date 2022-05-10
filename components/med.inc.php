@@ -17,7 +17,7 @@
                     $idLeku = $_GET["idLeku"];
                     $iloscPozostala = $_GET["med_php?updatePozostalo"];
                     $diff = $iloscPozostala - $ilosc;
-                 ?
+                 
                     $sql = "UPDATE `leki_w_apteczce` SET `ilosc_pozostala` = '$diff' WHERE `leki_w_apteczce`.`idleki_w_apteczce` = $idLeku";
                     
                     $res = mysqli_query($conn, $sql);
