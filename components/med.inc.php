@@ -10,17 +10,24 @@
  
           if (zalogowany()) {
             if(isset($_POST)) // add lek
-            {              
-                if(isset($_GET) && isset($_GET["updatePozostalo"])) // add lek
+            {                              
+                if(isset($_GET) && isset($_POST["iloscUsed"]))
                 {
-                    $ilosc = $_POST["ilosc"];
+                    $ilosc = $_POST["iloscUsed"];
                     $idLeku = $_GET["idLeku"];
-                    var_dump($_POST);
-                    echo "workd";
-                    // update ilosc pozostala
-                    // <a href='=$d&idLeku=$idleki_w_apteczce'>
+                    $iloscPozostala = $_GET["med_php?updatePozostalo"];
+                    $diff = $iloscPozostala - $ilosc;
+                 ?
+                    $sql = "UPDATE `leki_w_apteczce` SET `ilosc_pozostala` = '$diff' WHERE `leki_w_apteczce`.`idleki_w_apteczce` = $idLeku";
+                    
+                    $res = mysqli_query($conn, $sql);
+    
+                    if ($res )
+                    echo "<h2>Użyto leku</h2>";
+                    else
+                    echo "Błąd zapytania";
                 }
-                if(isset($_GET) && isset($_GET["setZero"])) // add lek
+                if(isset($_GET) && isset($_GET["setZero"])) 
                 {                
                   $setZeroID =  $_GET['setZero'];
   
@@ -298,8 +305,8 @@
                     <td>$nazwa</td>
                     <td>$data_waznosci</td>
                     <td>$ilosc_pozostala</td>
-                    <td><form method='post' action='med.php?med.php?updatePozostalo=1&idLeku=$idleki_w_apteczce'><input min='1' max='$ilosc_pozostala' 
-                    type='number' id='typeName' class='form-control form-control-sm' name='ilosc' required />                               
+                    <td><form method='post' action='med.php?med.php?updatePozostalo=$ilosc_pozostala&idLeku=$idleki_w_apteczce'><input min='1' max='$ilosc_pozostala' 
+                    type='number' id='typeName' class='form-control form-control-sm' name='iloscUsed' required />                               
                     <div class='text-center'>
                         <button class='btn btn-light btn-lg btn-rounded ' type='submit'>Użyj</button>
                     </div></form></td>
