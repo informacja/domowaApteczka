@@ -10,14 +10,30 @@
  
           if (zalogowany()) {
             if(isset($_POST)) // add lek
-            {
-                
+            {              
                 if(isset($_GET) && isset($_GET["updatePozostalo"])) // add lek
                 {
+                    $ilosc = $_POST["ilosc"];
+                    $idLeku = $_GET["idLeku"];
+                    var_dump($_POST);
+                    echo "workd";
                     // update ilosc pozostala
                     // <a href='=$d&idLeku=$idleki_w_apteczce'>
                 }
-              else if(isset($_GET) && isset($_GET["addLek"])) // add lek
+                if(isset($_GET) && isset($_GET["setZero"])) // add lek
+                {                
+                  $setZeroID =  $_GET['setZero'];
+  
+                  $sql = "UPDATE `leki_w_apteczce` SET `status` = '0' WHERE `leki_w_apteczce`.`idleki_w_apteczce` = $setZeroID";
+                 
+                  $res = mysqli_query($conn, $sql);
+  
+                  if ($res )
+                  echo "<h2>Zutylizowano</h2>";
+                  else
+                  echo "Błąd utylizacji";
+                }
+               if(isset($_GET) && isset($_GET["addLek"])) // add lek
               {                
                 $idLeku = $_POST["idLeku"];
                 $nazwaLeku = $_POST["nazwaLeku"];
@@ -182,7 +198,7 @@
                            <th scope="col">Nazwa leku</th>
                            <th scope="col">Data ważności</th>
                            <th scope="col">Pozostała ilość</th>
-                           <th scope="col">Ilość</th>
+                           <th scope="col">Utylizuj</th>
                        </tr>
                    </thead>
                    <tbody>
@@ -199,7 +215,7 @@
                 if( mysqli_num_rows($res) > 0 )  {
                     $counter= 0;
                   while($record = mysqli_fetch_assoc($res)){
-                    var_dump($record);
+                    // var_dump($record);
                     echo "<br>";
                     $counter++;
                     $idleki_w_apteczce = $record["idleki_w_apteczce"];
@@ -242,7 +258,7 @@
                <?php
             } else if (isset($_GET["wydaj"])) { ?>
 
-<table class="table text-white ">
+               <table class="table text-white ">
                    <thead>
                        <tr>
                            <th scope="col">L.p.</th>
@@ -261,7 +277,8 @@
               leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
               && leki_w_apteczce.apteczki_idapteczki = $idApteczki
               && leki_w_apteczce.data_waznosci > CURRENT_DATE
-              && leki_w_apteczce.status > 0";
+              && leki_w_apteczce.status > 0
+              && leki_w_apteczce.ilosc_pozostala > 0";
 
               $res = mysqli_query($conn, $sql);
 
@@ -269,7 +286,7 @@
                 if( mysqli_num_rows($res) > 0 )  {
                     $counter= 0;
                   while($record = mysqli_fetch_assoc($res)){
-                    var_dump($record);
+                    // var_dump($record);
                     echo "<br>";
                     $counter++;
                     $idleki_w_apteczce = $record["idleki_w_apteczce"];
@@ -281,11 +298,11 @@
                     <td>$nazwa</td>
                     <td>$data_waznosci</td>
                     <td>$ilosc_pozostala</td>
-                    <td><form method='post' action='med.php?med.php?updatePozostalo'><input min='1' max='$ilosc_pozostala' type='number' id='typeName' class='form-control form-control-sm' name='ilosc'
-                                   required />                               
-                                <div class='text-center'>
-                    <button class='btn btn-light btn-lg btn-rounded ' type='submit'>Użyj</button>
-                </div></form></td>
+                    <td><form method='post' action='med.php?med.php?updatePozostalo=1&idLeku=$idleki_w_apteczce'><input min='1' max='$ilosc_pozostala' 
+                    type='number' id='typeName' class='form-control form-control-sm' name='ilosc' required />                               
+                    <div class='text-center'>
+                        <button class='btn btn-light btn-lg btn-rounded ' type='submit'>Użyj</button>
+                    </div></form></td>
                   </tr>";
 
                   }
