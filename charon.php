@@ -26,8 +26,6 @@ function chgw($dane){
     $user_password = mysqli_real_escape_string($conn, $user_password);
     
     $sql = "SELECT user_email, user_password_hash, apteczki_idapteczki, user_name, user_id FROM `users` WHERE user_email='$user_email'";
-    // $sql = "INSERT INTO `leki_wydane_wprowadzone` ( `leki_w_apteczce_idleki_w_apteczce`, `users_idusers`) VALUES ( '1', '1')";
-    // INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`) VALUES ('1', '1', '1', '1', '1', '2022-05-03', '1');
     $res = mysqli_query($conn, $sql);
     
     echo "<h1>Uwaga</h1>";

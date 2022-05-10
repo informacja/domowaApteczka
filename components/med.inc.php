@@ -14,13 +14,20 @@
               if(isset($_GET) && isset($_GET["addLek"])) // add lek
               {                
                 $idLeku = $_POST["idLeku"];
+                $nazwaLeku = $_POST["nazwaLeku"];
                 $ilosc = $_POST["ilosc"];
                 $data = $_POST["data"];
-                $status = $_POST["status"];
-                $idApteczki = $_SESSION["idApteczki"];
+                $cena = $_POST["cena"];
+                $idApteczki = $_SESSION["apteczkiId"];
+                if( isempty($nazwaLeku) )
+                {
 
-                $sql = "INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `status`)
-                VALUES (NULL, '$idApteczki', '$idLeku', '$ilosc', '$ilosc', '$data', '$status')";
+                }else {
+                    // select id specyfiku po nazwie
+                }
+
+                $sql = "INSERT INTO `leki_w_apteczce` (`idleki_w_apteczce`, `apteczki_idapteczki`, `leki_specyfikacja_idleki`, `ilosc_kupiona`, `ilosc_pozostala`, `data_waznosci`, `cena`, `status`)
+                VALUES (NULL, '$idApteczki', '$idLeku', '$ilosc', '$ilosc', '$data', '$cena', '1')";
                
                 $res = mysqli_query($conn, $sql);
 
@@ -118,11 +125,12 @@
                               else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
 ?>         
                             </select>
-                        </div>
-                           <!-- <div class="form-outline form-white mb-4">
+                            <div class="form-outline form-white mb-4">
                                <input type="text" id="typeName" class="form-control form-control-lg" name="nazwaLeku" />
-                               <label class="form-label" for="typeName">Nazwa leku</label>
-                           </div> -->
+                               <label class="form-label" for="typeName">lub Nazwa leku</label>
+                           </div>
+                        </div>
+                    
                            <div class="form-outline form-white mb-4">
                                <input type="number" id="typeName" class="form-control form-control-lg" name="ilosc" required />
                                <label class="form-label" for="typeName">Ilość kupiona</label>
@@ -133,22 +141,9 @@
                            </div>
 
                            <div class="form-outline form-white mb-4">
-                               <input type="number" id="typePassword" class="form-control form-control-lg" name="status" required/>
-                               <label class="form-label" for="typePassword">Status</label>
+                               <input type="number" id="typePassword" class="form-control form-control-lg" name="cena" required/>
+                               <label class="form-label" for="typePassword">Cena</label>
                            </div>
-                           <!-- 
-  <div class="form-check">
-    <input
-      class="form-check-input"
-      type="checkbox"
-      value=""
-      id="flexCheckDefault"
-    />
-    <label class="form-check-label" for="flexCheckDefault">
-      Remember me
-    </label>
-  </div> -->
-
                            <!-- _____________________________________  !!!!!!!!  -->
                            
                                <div class="text-center py-5">
@@ -161,108 +156,66 @@
                    </div>
                </div>
                <?php
-            } else if (isset($_GET["utilization"])) { ?>
-               <section class="intro">
-                   <div class="bg-image h-100"
-                       style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/glassmorphism-article/img5.jpg');">
-                       <div class="mask d-flex align-items-center h-100">
-                           <div class="container">
-                               <div class="row justify-content-center">
-                                   <div class="col-12 col-md-10 col-lg-7 col-xl-6">
-                                       <div class="card mask-custom">
-                                           <div class="card-body p-5 text-white">
+            } else if (isset($_GET["utilization"])) { 
+                          $idApteczki = $_SESSION["apteczkiId"];
 
-                                               <div class="my-4">
+?>
+<table class="table table-hover"></table>
+<?php
+              $sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki && leki_w_apteczce.apteczki_idapteczki = $idApteczki";
 
-                                                   <h2 class="text-center mb-5">Register Form</h2>
+              $res = mysqli_query($conn, $sql);
 
-                                                   <form>
-                                                       <!-- 2 column grid layout with text inputs for the first and last names -->
-                                                       <div class="row">
-                                                           <div class="col-12 col-md-6 mb-4">
-                                                               <div class="form-outline form-white">
-                                                                   <input type="text" id="form3Example1"
-                                                                       class="form-control form-control-lg" />
-                                                                   <label class="form-label" for="form3Example1">First
-                                                                       name</label>
-                                                               </div>
-                                                           </div>
-                                                           <div class="col-12 col-md-6 mb-4">
-                                                               <div class="form-outline form-white">
-                                                                   <input type="text" id="form3Example2"
-                                                                       class="form-control form-control-lg" />
-                                                                   <label class="form-label" for="form3Example2">Last
-                                                                       name</label>
-                                                               </div>
-                                                           </div>
-                                                       </div>
+              if ($res )  {                              
+                if( mysqli_num_rows($res) > 0 )  {
+                  while($record = mysqli_fetch_assoc($res)){
+                    var_dump($record);
 
-                                                       <!-- Email input -->
-                                                       <div class="form-outline form-white mb-4">
-                                                           <input type="email" id="form3Example3"
-                                                               class="form-control form-control-lg" />
-                                                           <label class="form-label" for="form3Example3">Email
-                                                               address</label>
-                                                       </div>
-
-                                                       <!-- Password input -->
-                                                       <div class="form-outline form-white mb-4">
-                                                           <input type="password" id="form3Example4"
-                                                               class="form-control form-control-lg" />
-                                                           <label class="form-label"
-                                                               for="form3Example4">Password</label>
-                                                       </div>
-
-                                                       <!-- Checkbox -->
-                                                       <div class="form-check d-flex justify-content-center mb-4">
-                                                           <input class="form-check-input me-2" type="checkbox" value=""
-                                                               id="form2Example3" checked />
-                                                           <label class="form-check-label" for="form2Example3">
-                                                               Subscribe to our newsletter
-                                                           </label>
-                                                       </div>
-
-                                                       <!-- Submit button -->
-                                                       <button type="submit" class="btn btn-light btn-block mb-4">Sign
-                                                           up</button>
-
-                                                       <!-- Register buttons -->
-                                                       <div class="text-center">
-                                                           <p>or sign up with:</p>
-                                                           <button type="button"
-                                                               class="btn btn-light btn-floating mx-1">
-                                                               <i class="fab fa-facebook-f"></i>
-                                                           </button>
-
-                                                           <button type="button"
-                                                               class="btn btn-light btn-floating mx-1">
-                                                               <i class="fab fa-google"></i>
-                                                           </button>
-
-                                                           <button type="button"
-                                                               class="btn btn-light btn-floating mx-1">
-                                                               <i class="fab fa-twitter"></i>
-                                                           </button>
-
-                                                           <button type="button"
-                                                               class="btn btn-light btn-floating mx-1">
-                                                               <i class="fab fa-github"></i>
-                                                           </button>
-                                                       </div>
-                                                   </form>
-
-                                               </div>
-
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </section>
+                    // array(12) { ["idleki_w_apteczce"]=> string(1) "2"
+                    //    ["apteczki_idapteczki"]=> string(1) "2"
+                    //     ["leki_specyfikacja_idleki"]=> string(1) "1" 
+                    //     ["ilosc_kupiona"]=> string(1) "1" 
+                    //     ["ilosc_pozostala"]=> string(1) "1" 
+                    //     ["data_waznosci"]=> string(10) "2022-05-03" 
+                    //     ["status"]=> string(1) "0" 
+                    //     ["idleki"]=> string(1) "1" 
+                    //     ["nazwa"]=> string(9) "Espumisan" 
+                    //     ["subst_czynna"]=> string(9) "simetikon" 
+                    //     ["ean"]=> string(13) "5909990168712" 
+                    //     ["op_zb"]=> string(3) "tak" } 
+                    // $idLeku = $record["idleki"];
+                    // $nazwaLeku = $record["nazwa"];
+                    // echo "<option value='$idLeku'>$nazwaLeku</option>";
+                  }
+                } else echo "Brak wierszy";
+              }
+              else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));?>
+              ?> 
                <?php
-            } else if (isset($_GET["wydaj"])) { ?>
+            } else if (isset($_GET["wydaj"])) { 
+              $idApteczki = $_SESSION["apteczkiId"];
+
+              $sql = "SELECT * FROM `leki_w_apteczce` WHERE apteczki_idapteczki = $idApteczki";
+
+              $res = mysqli_query($conn, $sql);
+              
+              if ($res )  {                              
+                if( mysqli_num_rows($res) > 0 )  {
+                  while($record = mysqli_fetch_assoc($res)){
+                    var_dump($record);
+                    // $idLeku = $record["idleki"];
+                    // $nazwaLeku = $record["nazwa"];
+                    // echo "<option value='$idLeku'>$nazwaLeku</option>";
+                  }
+                } else echo "Brak wierszy";
+            }
+            else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));?>
+
+<!-- array(7) { ["idleki_w_apteczce"]=> string(1) "2" ["apteczki_idapteczki"]=> string(1) "2" [
+  "leki_specyfikacja_idleki"]=> string(1) "1" ["ilosc_kupiona"]=> string(1) "1" ["ilosc_pozostala"]=> string(1) "1"
+   ["data_waznosci"]=> string(10) "2022-05-03" ["status"]=> string(1) "0" } -->
+
+
                <?php
             } else {
             ?>
@@ -271,7 +224,7 @@
                            Dodaj lek
                        </button></a>
 
-                   <h1>We code.</h1>
+                   <h1>Uzupełniaj</h1>
 
                    <p>
                        Utrzymuj porządek w swoich domowych zbiorach leczniczych. Dodawaj swoje leki zaraz po ich zakupie.
@@ -290,7 +243,7 @@
                    </button> -->
                    <!-- _____________________________________ !!!!!!!!!  -->
 
-                   <h1>We promote.</h1>
+                   <h1>Zarządzaj</h1>
 
                    <p>
                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -303,7 +256,7 @@
                            Wydaj
                        </button></a>
 
-                   <h1>We sell.</h1>
+                   <h1>Używaj</h1>
 
                    <p>
                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.

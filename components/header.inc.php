@@ -13,21 +13,38 @@
   
               <p>
                 Możesz dodać medykamenty, sprawdzić ich ceny i daty ważności. Wygeneruj raport, by sprawdzić integralność bazy i ruchy magazynowe.
-              </p>";
-            } else echo "
+              </p> <a href='raport.php'<button type='button' class='btn btn-outline-success btn-lg my-3'>
+              Raporty
+            </button></a>";
+            require_once("config.php");
+            $sql = "SELECT count(*) FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE";
+                    $res = mysqli_query($conn, $sql);
+                    
+                    if ($res )  {                              
+                        if( mysqli_num_rows($res) > 0 )  {
+                          while($record = mysqli_fetch_assoc($res)){
+                            $count = $record["count(*)"];
+                            // $nazwaLeku = $record["nazwa"];
+                            echo "<h4>Są $count leki przeterminowane, przejdź do meykamentów.</h4>";
+                          }
+                        } else echo "Brak przeterminowanych leków";
+                    } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
+
+              echo "
+            <a href='med.php'><button type='button' class='btn btn-outline-warning btn-lg my-3'>
+              Medykamenty
+            </button></a>";
+            } else {
+              echo "
             <h2>Witaj na stronie domowejApteczki</h2>
 
             <p>
             Domowa Apteczka. System, który umożliwi Ci zarządzanie domowymi farmaceutykami szybko i skutecznie.
             </p>";
+            }
             ?>
 
-            <button type="button" class="btn btn-outline-success btn-lg">
-              Read more
-            </button>
-            <button type="button" class="btn btn-outline-warning btn-lg">
-              Play video
-            </button>
+           
           </div>
           <div class="col-md-5">
             <img src="img/email_campaign_monochromatic.svg" alt="Header image" />
