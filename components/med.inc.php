@@ -356,9 +356,7 @@
                    <h1>Zarządzaj</h1>
 
                    <p>
-                       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                       Delectus, tempore placeat corrupti enim, cumque ex? Mollitia nihil
-                       sint cumque omnis iure nisi.
+                       Teraz utylizacja to nie problem.
                    </p>
                </div>
                <div class="col-md-5">
@@ -369,9 +367,7 @@
                    <h1>Używaj</h1>
 
                    <p>
-                       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                       Delectus, tempore placeat corrupti enim, cumque ex? Mollitia nihil
-                       sint cumque omnis iure nisi.
+                      Zanacz że zużyłeś lek z apteczki.
                    </p>
                </div>
                <div class="col-md-5"><img src="img/revenue_.svg" alt="" /></div>
