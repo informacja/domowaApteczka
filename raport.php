@@ -1,9 +1,19 @@
 <?php require('components/head.inc.php'); ?>
 <?php include('components/navbar.inc.php'); ?>
-<?php include('components/companies.inc.php'); ?> 
+<?php //include('components/companies.inc.php'); ?> 
+<?php include('components/raport.inc.php'); ?> 
+
 <?php
 
 require_once("config.php");
+
+echo  "view all the data
+*raport.php*
+Tabelki:
+- utylizacji
+- zakupionych
+- zużytych
+LOG";
             $sql = "SELECT * FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE";
                     $res = mysqli_query($conn, $sql);
                     
@@ -19,13 +29,7 @@ require_once("config.php");
                     } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
 
             
-echo  "view all the data
-*raport.php*
-Tabelki:
-- utylizacji
-- zakupionych
-- zużytych
-LOG";
+
 ?>
 
 $sql_leki = "SELECT leki_specyfikacja_idleki, ilosc_kupiona, ilosc_pozostala, leki_w_apteczce.status FROM `leki_w_apteczce`";
