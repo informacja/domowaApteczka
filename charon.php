@@ -3,7 +3,7 @@
 <?php
 session_start();
 echo '<meta charset="UTF-8">';
-echo '<h2>Zapewne nie znaleziono pliku <i>config.php</i>, możesz go utworzyć kopiując  <i>config.template.php  </i>i wprwadzając poprawne dane.</h2>';
+echo '<h2>Zapewne nie znaleziono pliku <i>config.php</i>, możesz go utworzyć kopiując  <i>config.template.php  </i>i wprowadzając poprawne dane.</h2>';
 
 function redirect($url) {
     ob_start();
