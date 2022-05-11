@@ -19,8 +19,7 @@
             require_once("config.php");
 
             $idApteczki = $_SESSION["apteczkiId"];
-            $sql = "SELECT count(*) FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE 
-            -- leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+            $sql = "SELECT count(*), sum(price) FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE 
             && leki_w_apteczce.apteczki_idapteczki = $idApteczki
              && leki_w_apteczce.status > 0
             && leki_w_apteczce.data_waznosci <= CURRENT_DATE
@@ -32,8 +31,9 @@
                         if( mysqli_num_rows($res) > 0 )  {
                           while($record = mysqli_fetch_assoc($res)){
                             $count = $record["count(*)"];
+                            $sum = $record["sum(price)"];
                             // $nazwaLeku = $record["nazwa"];
-                            echo "<h4>Liczba przeterminowanych leków to $count, przejdź do zarządzania medykamentami.</h4>";
+                            echo "<h4>Liczba przeterminowanych leków to $count, które kosztowały $sum, przejdź do zarządzania medykamentami.</h4>";
                           }
                         } else echo "Brak przeterminowanych leków";
                     } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
@@ -43,7 +43,24 @@
               Medykamenty
             </button></a>";
                     // cena roczna 
-
+                    $sql = "SELECT sum(price) FROM `leki_w_apteczce` WHERE 
+                    leki_w_apteczce.data_waznosci > CURRENT_DATE 
+                    && leki_w_apteczce.apteczki_idapteczki = $idApteczki 
+                    && leki_w_apteczce.status > 0
+                    && leki_w_apteczce.ilosc_pozostala > 0";
+         
+                            $res = mysqli_query($conn, $sql);
+                            
+                            if ($res )  {                              
+                                if( mysqli_num_rows($res) > 0 )  {
+                                  while($record = mysqli_fetch_assoc($res)){
+                                    $sum = $record["sum(price)"];
+                                    // $nazwaLeku = $record["nazwa"];
+                                    echo "<h4>Cena ważnych leków w tej apteczce to $sum PLN</h4>";
+                                  }
+                                } else echo "Brak przeterminowanych leków";
+                            } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
+        
 
 
             } else {
