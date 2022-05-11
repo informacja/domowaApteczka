@@ -17,7 +17,15 @@
               Raporty
             </button></a>";
             require_once("config.php");
-            $sql = "SELECT count(*) FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE";
+
+            $idApteczki = $_SESSION["apteczkiId"];
+            $sql = "SELECT count(*) FROM `leki_w_apteczce` WHERE leki_w_apteczce.data_waznosci < CURRENT_DATE 
+            -- leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+            && leki_w_apteczce.apteczki_idapteczki = $idApteczki
+             && leki_w_apteczce.status > 0
+            && leki_w_apteczce.data_waznosci <= CURRENT_DATE
+             && leki_w_apteczce.ilosc_pozostala > 0";
+ 
                     $res = mysqli_query($conn, $sql);
                     
                     if ($res )  {                              
@@ -25,7 +33,7 @@
                           while($record = mysqli_fetch_assoc($res)){
                             $count = $record["count(*)"];
                             // $nazwaLeku = $record["nazwa"];
-                            echo "<h4>Liczba przeterminowanych leków to $count, przejdź do zarządzania meykamentów.</h4>";
+                            echo "<h4>Liczba przeterminowanych leków to $count, przejdź do zarządzania medykamentami.</h4>";
                           }
                         } else echo "Brak przeterminowanych leków";
                     } else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
@@ -34,6 +42,10 @@
             <a href='med.php'><button type='button' class='btn btn-outline-warning btn-lg my-3'>
               Medykamenty
             </button></a>";
+                    // cena roczna 
+
+
+
             } else {
               echo "
             <h2>Witaj na stronie domowejApteczki</h2>
