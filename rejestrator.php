@@ -19,14 +19,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $haslo = chgw($_POST["pass"]);
     $apteczka = chgw($_POST["aidkit"]);
 
-    // if(empty($_POST["imie"]))
-    // {
-    //     echo "Podaj imie".$_POST["name"];
-    // }
-    // else echo $imie."<br> Wybrałeś rodzinę systemów $comp";
-
-
-// if ! empyt/
 require('config.php');
 
 $conn =  mysqli_connect(

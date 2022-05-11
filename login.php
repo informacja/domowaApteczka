@@ -61,8 +61,6 @@
 session_start();
 if(!isset($_SESSION["startLogin"]) || $_SESSION["startLogin"] != 1)
 session_regenerate_id();
-// $_SESSION["startLogin"] = 1;
-// $_SESSION["komunikat"] = "U mnie działa";
 
 ?>
 
