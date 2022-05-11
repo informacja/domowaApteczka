@@ -10,13 +10,13 @@
         <div class="row">
           <div class="col-md-10">
           <H1>Raporty leków</h1>
-	<a href='raport.php?utylizacja'><button type='button' class='btn btn-outline-warning btn-lg m-3 ml-5'>
+	<a href='raport.php?utylizacja'><button type='button' class='btn btn-outline-secondary btn-lg m-3 ml-5'>
     	Utylizacji
     </button></a>
-	<a href='raport.php?zakupionych'><button type='button' class='btn btn-outline-warning btn-lg m-3'>
+	<a href='raport.php?zakupionych'><button type='button' class='btn btn-outline-secondary btn-lg m-3'>
     	Zakupionych
     </button></a>
-	<a href='raport.php?zużytych'><button type='button' class='btn btn-outline-warning btn-lg m-3'>
+	<a href='raport.php?zużytych'><button type='button' class='btn btn-outline-secondary btn-lg m-3'>
     	Zużytych
     </button></a>
 <H1>Logi</h1>
@@ -25,26 +25,185 @@
     </button></a>
 	<a href='raport.php?logUtil'><button type='button' class='btn btn-outline-info btn-lg m-3'>
     	Utylizacji
-    </button></a>
-           
+    </button></a>           
           </div>
         </div>
+ <?php if(isset($_GET)){ ?>
+
+
+<?php
+require_once("config.php");
+}  if (isset($_GET["utylizacja"])) { 
+?>
+<table class="table table-hover ">
+<thead>
+  <tr>
+      <th scope="col">L.p.</th>
+      <th scope="col">Nazwa leku</th>
+      <th scope="col">Data ważności</th>
+      <th scope="col">Ilość zakupiona</th>
+      <th scope="col">Zutylizowana ilość</th>
+  </tr>
+</thead>
+<tbody>
+<?php
+
+$idApteczki = $_SESSION["apteczkiId"];
+
+$sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE 
+leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+-- && leki_w_apteczce.apteczki_idapteczki = $idApteczki
+-- && leki_w_apteczce.data_waznosci > CURRENT_DATE
+&& leki_w_apteczce.status = 0
+&& leki_w_apteczce.ilosc_pozostala > 0
+";
+
+$res = mysqli_query($conn, $sql);
+
+if ($res )  {                              
+if( mysqli_num_rows($res) > 0 )  {
+$counter= 0;
+while($record = mysqli_fetch_assoc($res)){
+// var_dump($record);
+echo "<br>";
+$counter++;
+$idleki_w_apteczce = $record["idleki_w_apteczce"];
+$nazwa = $record["nazwa"];
+$data_waznosci = $record["data_waznosci"];
+$ilosc_kupiona = $record["ilosc_kupiona"];
+$ilosc_pozostala = $record["ilosc_pozostala"];
+echo "<tr>
+<th scope='row'>$counter</th>
+<td>$nazwa</td>
+<td>$data_waznosci</td>
+<td>$ilosc_kupiona</td>
+<td>$ilosc_pozostala</td>
+
+</tr>";
+
+}
+} else echo "Brak wierszy";
+}
+else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
+}
+
+if (isset($_GET["zakupionych"])) { 
+  ?>
+  <table class="table table-hover ">
+<thead>
+    <tr>
+        <th scope="col">L.p.</th>
+        <th scope="col">Nazwa leku</th>
+        <th scope="col">Data ważności</th>
+        <th scope="col">Ilość zakupiona</th>
+        <!-- <th scope="col">Zutylizowana ilość</th> -->
+    </tr>
+</thead>
+<tbody>
+  <?php
+
+$idApteczki = $_SESSION["apteczkiId"];
+
+$sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE 
+leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+-- && leki_w_apteczce.apteczki_idapteczki = $idApteczki
+-- && leki_w_apteczce.data_waznosci > CURRENT_DATE
+&& leki_w_apteczce.status > 0
+&& leki_w_apteczce.ilosc_pozostala >= 0
+";
+
+$res = mysqli_query($conn, $sql);
+
+if ($res )  {                              
+if( mysqli_num_rows($res) > 0 )  {
+ $counter= 0;
+while($record = mysqli_fetch_assoc($res)){
+ // var_dump($record);
+ echo "<br>";
+ $counter++;
+ $idleki_w_apteczce = $record["idleki_w_apteczce"];
+ $nazwa = $record["nazwa"];
+ $data_waznosci = $record["data_waznosci"];
+ $ilosc_kupiona = $record["ilosc_kupiona"];
+ $ilosc_pozostala = $record["ilosc_pozostala"];
+ echo "<tr>
+ <th scope='row'>$counter</th>
+ <td>$nazwa</td>
+ <td>$data_waznosci</td>
+ <td>$ilosc_kupiona</td>
+ 
+
+</tr>";
+
+}
+} else echo "Brak wierszy";
+}
+else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
+}
+if (isset($_GET["zużytych"])) { 
+      ?>
+      <table class="table table-hover ">
+    <thead>
+        <tr>
+            <th scope="col">L.p.</th>
+            <th scope="col">Nazwa leku</th>
+            <th scope="col">Data ważności</th>
+            <th scope="col">Ilość zakupiona</th>
+            <!-- <th scope="col">Zutylizowana ilość</th> -->
+        </tr>
+    </thead>
+    <tbody>
+      <?php
+
+   $idApteczki = $_SESSION["apteczkiId"];
+
+$sql = "SELECT * FROM `leki_w_apteczce` JOIN leki_specyfikacja WHERE 
+leki_w_apteczce.leki_specyfikacja_idleki = leki_specyfikacja.idleki 
+-- && leki_w_apteczce.apteczki_idapteczki = $idApteczki
+-- && leki_w_apteczce.data_waznosci > CURRENT_DATE
+-- && leki_w_apteczce.status > 0
+&& leki_w_apteczce.ilosc_pozostala = 0
+";
+
+$res = mysqli_query($conn, $sql);
+
+if ($res )  {                              
+ if( mysqli_num_rows($res) > 0 )  {
+     $counter= 0;
+   while($record = mysqli_fetch_assoc($res)){
+     // var_dump($record);
+     echo "<br>";
+     $counter++;
+     $idleki_w_apteczce = $record["idleki_w_apteczce"];
+     $nazwa = $record["nazwa"];
+     $data_waznosci = $record["data_waznosci"];
+     $ilosc_kupiona = $record["ilosc_kupiona"];
+     $ilosc_pozostala = $record["ilosc_pozostala"];
+     echo "<tr>
+     <th scope='row'>$counter</th>
+     <td>$nazwa</td>
+     <td>$data_waznosci</td>
+     <td>$ilosc_kupiona</td>
+     
+ 
+   </tr>";
+
+   }
+ } else echo "Brak wierszy";
+}
+else die("Błąd pobierania listy specyfików <br>" . mysqli_error($conn));
+}?>
+
+</tbody>
+</table>
+
+
         <div class="row my-3 g-3">
-          <div class="col-md-4">
-            <img src="img/c1.jpg" alt="Gallery image" class="img-fluid" />
-          </div>
-          <div class="col-md-4">
-            <img src="img/c2.jpg" alt="Gallery image" class="img-fluid" />
-          </div>
-          <div class="col-md-4">
-            <img src="img/c3.jpg" alt="Gallery image" class="img-fluid" />
-          </div>
+
         </div>
         <div class="row mt-5 justify-content-end">
           <div class="col-md-2">
-            <button type="button" class="btn btn-outline-secondary">
-              See all works
-            </button>
+          
           </div>
         </div>
       </div>
